@@ -635,9 +635,9 @@ POINT CPlotBaseMe::GetMouseOverPoint()
 	return mp;
 }
 
-void CPlotBaseMe::ClearMarks(map<int,PlotMark*> *marks)
+void CPlotBaseMe::ClearMarks(map<int,CPlotMarkMe*> *marks)
 {
-	map<int,PlotMark*>::iterator sIterPlot = marks->begin();
+	map<int,CPlotMarkMe*>::iterator sIterPlot = marks->begin();
 	for(; sIterPlot != marks->end(); ++sIterPlot)
 	{
 		delete sIterPlot->second;
@@ -659,7 +659,7 @@ bool CPlotBaseMe::CreatePoint(const POINT& mp)
 			double date = m_dataSource->GetXValue(mouseIndex);
 			ClearMarks(&m_marks);
 			double yValue = GetNumberValue(mp);
-			m_marks.insert(make_pair(0, new PlotMark(0, date, yValue)));
+			m_marks.insert(make_pair(0, new CPlotMarkMe(0, date, yValue)));
 			return true;
 		}
 	}
@@ -682,8 +682,8 @@ bool CPlotBaseMe::Create2PointsA(const POINT& mp)
 				double sDate = m_dataSource->GetXValue(eIndex);
 				ClearMarks(&m_marks);
 				double numberValue = GetNumberValue(mp);
-				m_marks.insert(make_pair(0, new PlotMark(0, fDate, numberValue)));
-				m_marks.insert(make_pair(1, new PlotMark(1, sDate, numberValue)));
+				m_marks.insert(make_pair(0, new CPlotMarkMe(0, fDate, numberValue)));
+				m_marks.insert(make_pair(1, new CPlotMarkMe(1, sDate, numberValue)));
 				return true;
 			}
 		}
@@ -703,8 +703,8 @@ bool CPlotBaseMe::Create2PointsB(const POINT& mp)
 			double date = m_dataSource->GetXValue(mouseIndex);
 			ClearMarks(&m_marks);
 			double numberValue = GetNumberValue(mp);
-			m_marks.insert(make_pair(0, new PlotMark(0, date, numberValue)));
-			m_marks.insert(make_pair(1, new PlotMark(1, date, numberValue)));
+			m_marks.insert(make_pair(0, new CPlotMarkMe(0, date, numberValue)));
+			m_marks.insert(make_pair(1, new CPlotMarkMe(1, date, numberValue)));
 			return true;
 		}
 	}
@@ -723,7 +723,7 @@ bool CPlotBaseMe::Create2CandlePoints(const POINT& mp)
 			CBaseShapeMe *shape = (*sIter);
 			if (shape->IsVisible())
 			{
-				CandleShape *cs = dynamic_cast<CandleShape*>(shape);
+				CCandleShapeMe *cs = dynamic_cast<CCandleShapeMe*>(shape);
 				if (cs)
 				{
 					int mouseIndex = chart->GetIndex(mp);
@@ -739,8 +739,8 @@ bool CPlotBaseMe::Create2CandlePoints(const POINT& mp)
 							double sDate = m_dataSource->GetXValue(eIndex);
 							ClearMarks(&m_marks);
 							double numberValue = GetNumberValue(mp);
-							m_marks.insert(make_pair(0, new PlotMark(0, fDate, numberValue)));
-							m_marks.insert(make_pair(1, new PlotMark(1, sDate, numberValue)));
+							m_marks.insert(make_pair(0, new CPlotMarkMe(0, fDate, numberValue)));
+							m_marks.insert(make_pair(1, new CPlotMarkMe(1, sDate, numberValue)));
 							UpdateSourceField(L"CLOSE", cs->GetCloseField());
 							UpdateSourceField(L"OPEN", cs->GetOpenField());
 							UpdateSourceField(L"HIGH", cs->GetHighField());
@@ -772,18 +772,18 @@ bool CPlotBaseMe::Create3Points(const POINT& mp)
 				double sDate = m_dataSource->GetXValue(eIndex);
 				ClearMarks(&m_marks);
 				double numberValue = GetNumberValue(mp);
-				m_marks.insert(make_pair(0, new PlotMark(0, fDate, numberValue)));
-				m_marks.insert(make_pair(1, new PlotMark(1, sDate, numberValue)));
+				m_marks.insert(make_pair(0, new CPlotMarkMe(0, fDate, numberValue)));
+				m_marks.insert(make_pair(1, new CPlotMarkMe(1, sDate, numberValue)));
 
 				CVScaleMe *vscale = m_div->GetVScale(m_attachVScale);
 				if (vscale && vscale->GetVisibleMax() != vscale->GetVisibleMin())
 				{
-					m_marks.insert(make_pair(2, new PlotMark(2, fDate, 
+					m_marks.insert(make_pair(2, new CPlotMarkMe(2, fDate,
 						numberValue + (vscale->GetVisibleMax() - vscale->GetVisibleMin()) / 4.0)));
 				}
 				else
 				{
-					m_marks.insert(make_pair(2, new PlotMark(2, fDate, numberValue)));
+					m_marks.insert(make_pair(2, new CPlotMarkMe(2, fDate, numberValue)));
 				}
 				return true;
 			}
@@ -807,7 +807,7 @@ void CPlotBaseMe::CreateCandlePoint(int pos, int index, int close)
 		{
 			yValue = m_dataSource->Get2(index, close);
 		}
-		m_marks.insert(make_pair(pos, new PlotMark(pos, date, yValue)));
+		m_marks.insert(make_pair(pos, new CPlotMarkMe(pos, date, yValue)));
 	}
 }
 
@@ -821,7 +821,7 @@ bool CPlotBaseMe::Create4CandlePoints(const POINT& mp)
 		for(; sIter != shapes.end(); ++sIter)
 		{
 			CBaseShapeMe *shape = (*sIter);
-			CandleShape *cshape = dynamic_cast<CandleShape*>(shape);
+			CCandleShapeMe *cshape = dynamic_cast<CCandleShapeMe*>(shape);
 			if (shape->IsVisible() && cshape)
 			{
 				int mouseIndex = chart->GetIndex(mp);
@@ -847,7 +847,7 @@ bool CPlotBaseMe::Create4CandlePoints(const POINT& mp)
 	return false;
 }
 
-double* CPlotBaseMe::GetCandleRange(map<int,PlotMark*> *pList, int *length)
+double* CPlotBaseMe::GetCandleRange(map<int,CPlotMarkMe*> *pList, int *length)
 {
 	*length = 0;
 	if ((int)pList->size() == 0 || (int)m_sourceFields.size() == 0)
@@ -860,10 +860,10 @@ double* CPlotBaseMe::GetCandleRange(map<int,PlotMark*> *pList, int *length)
 	{
 		return 0;
 	}
-	map<int,PlotMark*>::iterator pList0 = pList->find(0);
-	map<int,PlotMark*>::iterator pList1 = pList->find(1);;
-	int bRecord = m_dataSource->GetRowIndex(pList0->second->Key);//v52
-	int eRecord = m_dataSource->GetRowIndex(pList1->second->Key);//v51
+	map<int,CPlotMarkMe*>::iterator pList0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator pList1 = pList->find(1);;
+	int bRecord = m_dataSource->GetRowIndex(pList0->second->Key);
+	int eRecord = m_dataSource->GetRowIndex(pList1->second->Key);
 	double *highlist = 0;
 	double *lowlist = 0;
 	int hightLength = 0;
@@ -899,7 +899,7 @@ double* CPlotBaseMe::GetCandleRange(map<int,PlotMark*> *pList, int *length)
 	return retArray;
 }
 
-float* CPlotBaseMe::GetLineParams(PlotMark *markA, PlotMark *markB, int *length)
+float* CPlotBaseMe::GetLineParams(CPlotMarkMe *markA, CPlotMarkMe *markB, int *length)
 {
 	float y1 = PY(markA->Value);
 	float y2 = PY(markB->Value);
@@ -922,7 +922,7 @@ float* CPlotBaseMe::GetLineParams(PlotMark *markA, PlotMark *markB, int *length)
 	return NULL;
 }
 
-double* CPlotBaseMe::GetLRBandRange(map<int,PlotMark*> *marks, float *param)
+double* CPlotBaseMe::GetLRBandRange(map<int,CPlotMarkMe*> *marks, float *param)
 {
 	map<String, int>::iterator sIterHigh;
 	map<String, int>::iterator sIterLow;
@@ -939,8 +939,8 @@ double* CPlotBaseMe::GetLRBandRange(map<int,PlotMark*> *marks, float *param)
 	float b = param[1];
 	vector<double> upList;
 	vector<double> downList;
-	map<int,PlotMark*>::iterator pList0 = marks->find(0);
-	map<int,PlotMark*>::iterator pList1 = marks->find(1);;
+	map<int,CPlotMarkMe*>::iterator pList0 = marks->find(0);
+	map<int,CPlotMarkMe*>::iterator pList1 = marks->find(1);;
 	int bIndex = m_dataSource->GetRowIndex(pList0->second->Key);//v42
 	int eIndex = m_dataSource->GetRowIndex(pList1->second->Key);//v41
 	for (int i = bIndex; i <= eIndex; i++)
@@ -975,7 +975,7 @@ double* CPlotBaseMe::GetLRBandRange(map<int,PlotMark*> *marks, float *param)
 	//return new double[] { upSubValue, downSubValue };
 }
 
-float* CPlotBaseMe::GetLRParams(map<int,PlotMark*> *marks)
+float* CPlotBaseMe::GetLRParams(map<int,CPlotMarkMe*> *marks)
 {
 	map<String, int>::iterator sIterClose;
 	if ((int)m_sourceFields.size() > 0)
@@ -983,10 +983,10 @@ float* CPlotBaseMe::GetLRParams(map<int,PlotMark*> *marks)
 		sIterClose = m_sourceFields.find(L"CLOSE");
 		if(sIterClose != m_sourceFields.end())
 		{
-			map<int,PlotMark*>::iterator pList0 = marks->find(0);
-			map<int,PlotMark*>::iterator pList1 = marks->find(1);;
-			int bIndex = m_dataSource->GetRowIndex(pList0->second->Key);//v30
-			int eIndex = m_dataSource->GetRowIndex(pList1->second->Key);//v29
+			map<int,CPlotMarkMe*>::iterator pList0 = marks->find(0);
+			map<int,CPlotMarkMe*>::iterator pList1 = marks->find(1);;
+			int bIndex = m_dataSource->GetRowIndex(pList0->second->Key);
+			int eIndex = m_dataSource->GetRowIndex(pList1->second->Key);
 			if (bIndex != -1 && eIndex != -1)
 			{
 				vector<double> closeVList;
@@ -1069,12 +1069,12 @@ int CPlotBaseMe::GetPy()
 	return m_div->GetTitleBar()->GetHeight();
 }
 
-RECT CPlotBaseMe::GetRectangle(PlotMark *markA, PlotMark *markB)
+RECT CPlotBaseMe::GetRectangle(CPlotMarkMe *markA, CPlotMarkMe *markB)
 {
 	double aValue = markA->Value;
 	double bValue = markB->Value;
-	int aIndex = m_dataSource->GetRowIndex(markA->Key);//v18
-	int bIndex = m_dataSource->GetRowIndex(markB->Key);//v17
+	int aIndex = m_dataSource->GetRowIndex(markA->Key);
+	int bIndex = m_dataSource->GetRowIndex(markB->Key);
 	float x = PX(aIndex);
 	float y = PY(aValue);
 	float xS = PX(bIndex);
@@ -1157,8 +1157,8 @@ void CPlotBaseMe::Move(const POINT& mp)
 			vScale->GetVisibleMin(), m_dataSource->RowsCount(), &yAddValue, &newIndex);
 		if (vScale->IsReverse())
 		{
-			PlotMark *mark = new PlotMark(i, m_dataSource->GetXValue(newIndex), m_startMarks[i]->Value - yAddValue);
-			map<int,PlotMark*>::iterator sIter = m_marks.find(i);
+			CPlotMarkMe *mark = new CPlotMarkMe(i, m_dataSource->GetXValue(newIndex), m_startMarks[i]->Value - yAddValue);
+			map<int,CPlotMarkMe*>::iterator sIter = m_marks.find(i);
 			if(sIter == m_marks.end())
 			{
 				m_marks.insert(make_pair(i, mark));
@@ -1170,8 +1170,8 @@ void CPlotBaseMe::Move(const POINT& mp)
 		}
 		else
 		{
-			PlotMark *mark = new PlotMark(i, m_dataSource->GetXValue(newIndex), m_startMarks[i]->Value + yAddValue);
-			map<int,PlotMark*>::iterator sIter = m_marks.find(i);
+			CPlotMarkMe *mark = new CPlotMarkMe(i, m_dataSource->GetXValue(newIndex), m_startMarks[i]->Value + yAddValue);
+			map<int,CPlotMarkMe*>::iterator sIter = m_marks.find(i);
 			if(sIter == m_marks.end())
 			{
 				m_marks.insert(make_pair(i, mark));
@@ -1207,7 +1207,7 @@ void CPlotBaseMe::OnPaintGhost(CPaintMe *paint)
 	m_isPaintingGhost = false;
 }
 
-void CPlotBaseMe::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void CPlotBaseMe::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 }
 
@@ -1247,8 +1247,8 @@ void CPlotBaseMe::Resize(int index)
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	PlotMark *mark = new PlotMark(index, m_dataSource->GetXValue(mouseIndex), y);
-	map<int,PlotMark*>::iterator sIter = m_marks.find(index);
+	CPlotMarkMe *mark = new CPlotMarkMe(index, m_dataSource->GetXValue(mouseIndex), y);
+	map<int,CPlotMarkMe*>::iterator sIter = m_marks.find(index);
 	if(sIter == m_marks.end())
 	{
 		m_marks.insert(make_pair(index, mark));
@@ -1321,8 +1321,8 @@ void CPlotBaseMe::Resize(const POINT& mp, POINT oppositePoint)
 		eDate = m_dataSource->GetXValue(indexE);
 	}
 	ClearMarks(&m_marks);
-	PlotMark *mark = new PlotMark(0, sDate, topValue);
-	map<int,PlotMark*>::iterator sIter = m_marks.find(0);
+	CPlotMarkMe *mark = new CPlotMarkMe(0, sDate, topValue);
+	map<int,CPlotMarkMe*>::iterator sIter = m_marks.find(0);
 	if(sIter == m_marks.end())
 	{
 		m_marks.insert(make_pair(0, mark));
@@ -1331,7 +1331,7 @@ void CPlotBaseMe::Resize(const POINT& mp, POINT oppositePoint)
 	{
 		sIter->second = mark;
 	} 
-	mark = new PlotMark(1, eDate, bottomValue);
+	mark = new CPlotMarkMe(1, eDate, bottomValue);
 	sIter = m_marks.find(1);
 	if(sIter == m_marks.end())
 	{
@@ -1341,8 +1341,8 @@ void CPlotBaseMe::Resize(const POINT& mp, POINT oppositePoint)
 	{
 		sIter->second = mark;
 	}
-	//m_marks[0] = new PlotMark(0, sDate, topValue);
-	//m_marks[1] = new PlotMark(1, eDate, bottomValue);
+	//m_marks[0] = new CPlotMarkMe(0, sDate, topValue);
+	//m_marks[1] = new CPlotMarkMe(1, eDate, bottomValue);
 }
 
 bool CPlotBaseMe::SelectPoint(const POINT& mp, float x, float y)
@@ -1423,7 +1423,7 @@ bool CPlotBaseMe::SelectRay(const POINT& mp, float x1, float y1, float x2, float
 	return SelectRay(mp, x1, y1, x2, y2, &k, &b);
 }
 
-ActionType CPlotBaseMe::SelectRect(const POINT& mp, PlotMark *markA, PlotMark *markB)
+ActionType CPlotBaseMe::SelectRect(const POINT& mp, CPlotMarkMe *markA, CPlotMarkMe *markB)
 {
 	RECT rect = GetRectangle(markA, markB);
 	int x1 = rect.left;

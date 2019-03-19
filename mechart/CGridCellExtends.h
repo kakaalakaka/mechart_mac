@@ -51,7 +51,7 @@ namespace MeLib
         virtual void SetString(const String& value);
 	};
     
-	class CGridButtonCellMe: public GridControlCell
+	class CGridButtonCellMe: public CGridControlCellMe
 	{
 	public:
 		CGridButtonCellMe();
@@ -59,7 +59,7 @@ namespace MeLib
 		CButtonMe* GetButton();
 	};
     
-	class CGridCheckBoxCellMe : public GridControlCell
+	class CGridCheckBoxCellMe : public CGridControlCellMe
 	{
 	protected:
 	public:
@@ -81,7 +81,7 @@ namespace MeLib
         virtual void SetString(const String& value);
 	};
     
-    class CGridComboBoxCellMe : public GridControlCell
+    class CGridComboBoxCellMe : public CGridControlCellMe
 	{
 	public:
 		CGridComboBoxCellMe();
@@ -104,7 +104,7 @@ namespace MeLib
         virtual void SetString(const String& value);
 	};
     
-	class CGridDivCellMe : public GridControlCell
+	class CGridDivCellMe : public CGridControlCellMe
 	{
 	public:
 		CGridDivCellMe();
@@ -184,7 +184,7 @@ namespace MeLib
         virtual void SetString(const String& value);
 	};
     
-	class CGridLabelCellMe : public GridControlCell
+	class CGridLabelCellMe : public CGridControlCellMe
 	{
 	public:
 		CGridLabelCellMe();
@@ -216,7 +216,7 @@ namespace MeLib
         virtual void SetString(const String& value);
 	};
     
-	class CGridRadioButtonCellMe : public GridControlCell
+	class CGridRadioButtonCellMe : public CGridControlCellMe
 	{
 	public:
 		CGridRadioButtonCellMe();
@@ -237,7 +237,7 @@ namespace MeLib
         virtual void SetString(const String& value);
 	};
     
-    class CGridSpinCellMe : public GridControlCell
+    class CGridSpinCellMe : public CGridControlCellMe
 	{
 	public:
 		CGridSpinCellMe();
@@ -284,11 +284,11 @@ namespace MeLib
 		virtual String GetPaintText();
 	};
 
-	class GridTextBoxCell: public GridControlCell
+	class CGridTextBoxCellMe: public CGridControlCellMe
 	{
 	public:
-		GridTextBoxCell();
-		virtual ~GridTextBoxCell();
+		CGridTextBoxCellMe();
+		virtual ~CGridTextBoxCellMe();
 		CTextBoxMe* GetTextBox();
 	};
 }

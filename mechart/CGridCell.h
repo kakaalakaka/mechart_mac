@@ -103,7 +103,7 @@ namespace MeLib
         virtual void SetString(const String& value);
 	};
     
-	class GridControlCell : public CGridCellMe
+	class CGridControlCellMe : public CGridCellMe
 	{
 	protected:
 		CControlMe *m_control;
@@ -115,8 +115,8 @@ namespace MeLib
 		static void ControlMouseMove(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke);
 		static void ControlMouseUp(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke);
 	public:
-		GridControlCell();
-		virtual ~GridControlCell();
+		CGridControlCellMe();
+		virtual ~CGridControlCellMe();
 		virtual CControlMe* GetControl();
 		virtual void SetControl(CControlMe *control);
 		virtual String GetString();

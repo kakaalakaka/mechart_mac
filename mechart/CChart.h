@@ -22,10 +22,11 @@ namespace MeLib
 	class CBaseShapeMe;
 	class BarShape;
 	class PointShape;
-	class CandleShape;
-	class PolylineShape;
-	class TextShape;
+	class CCandleShapeMe;
+	class CPolylineShapeMe;
+	class CTextShapeMe;
 	class CControlMe;
+    
 	class CChartMe:public CControlMe
 	{
     private:
@@ -75,22 +76,22 @@ namespace MeLib
         virtual void DrawText(CPaintMe *paint, LPCWSTR strText, _int64 dwPenColor,FONT *font, int left, int top);
 		virtual vector<double> GetVScaleStep(double max, double min, CDivMe *div, CVScaleMe *vScale);
 		virtual void OnPaintBar(CPaintMe *paint, CDivMe *div, BarShape *bs);
-		virtual void OnPaintCandle(CPaintMe *paint, CDivMe *div, CandleShape *cs);
-		virtual void OnPaintCandleEx(CPaintMe *paint, CDivMe *div, CandleShape *cs, int visibleMaxIndex, double visibleMax, int visibleMinIndex, double visibleMin);
+		virtual void OnPaintCandle(CPaintMe *paint, CDivMe *div, CCandleShapeMe *cs);
+		virtual void OnPaintCandleEx(CPaintMe *paint, CDivMe *div, CCandleShapeMe *cs, int visibleMaxIndex, double visibleMax, int visibleMinIndex, double visibleMin);
 		virtual void OnPaintCrossLine(CPaintMe *paint, CDivMe *div);
 		virtual void OnPaintDivBackGround(CPaintMe *paint, CDivMe *div);
 		virtual void OnPaintDivBorder(CPaintMe *paint, CDivMe *div);
 		virtual void OnPaintHScale(CPaintMe *paint, CDivMe *div);
 		virtual void OnPaintIcon(CPaintMe *paint);
 		virtual void OnPaintPlots(CPaintMe *paint, CDivMe *div);
-		virtual void OnPaintPolyline(CPaintMe *paint, CDivMe *div, PolylineShape *ls);
+		virtual void OnPaintPolyline(CPaintMe *paint, CDivMe *div, CPolylineShapeMe *ls);
 		virtual void OnPaintPolyline(CPaintMe *paint, CDivMe *div, _int64 lineColor, _int64 fillColor, int ciClr,
                              float lineWidth, PolylineStyle lineStyle, double value, AttachVScale attachVScale,
                              int scaleX, int lY, int i, vector<POINT> *points, int *x, int *y);
 		virtual void OnPaintResizeLine(CPaintMe *paint);
 		virtual void OnPaintSelectArea(CPaintMe *paint, CDivMe *div);
 		virtual void OnPaintShapes(CPaintMe *paint, CDivMe *div);
-		virtual void OnPaintText(CPaintMe *paint, CDivMe *div, TextShape *ts);
+		virtual void OnPaintText(CPaintMe *paint, CDivMe *div, CTextShapeMe *ts);
 		virtual void OnPaintTitle(CPaintMe *paint, CDivMe *div);
 		virtual void OnPaintToolTip(CPaintMe *paint);
 		virtual void OnPaintVScale(CPaintMe *paint, CDivMe *div);

@@ -17,7 +17,7 @@ namespace MeLib
 {
 	class CTreeMe;
     
-	class CTreeNodeMe : public GridControlCell
+	class CTreeNodeMe : public CGridControlCellMe
 	{
 	protected:
 		bool m_allowDragIn;

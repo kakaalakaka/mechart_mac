@@ -24,10 +24,10 @@ namespace MeLib
 	class CNativeBaseMe;
 	class CMathLibMe;
 	class CPlotMe;
-	class PlotMark
+	class CPlotMarkMe
 	{
 	public:
-		PlotMark(int index, double key, double value)
+		CPlotMarkMe(int index, double key, double value)
 		{
 			Index = index;
 			Key = key;
@@ -36,9 +36,9 @@ namespace MeLib
 		int Index;
 		double Key;
 		double Value;
-		PlotMark* Copy()
+		CPlotMarkMe* Copy()
 		{
-			PlotMark *plotMark = new PlotMark(Index, Key, Value);
+			CPlotMarkMe *plotMark = new CPlotMarkMe(Index, Key, Value);
 			return plotMark;
 		}
 	};
@@ -57,11 +57,11 @@ namespace MeLib
 		bool m_isPaintingGhost;
 		int m_lineStyle;
 		int m_lineWidth;
-		map<int,PlotMark*> m_marks;
+		map<int,CPlotMarkMe*> m_marks;
 		int m_moveTimes;
 		String m_plotType;
 		map<String,int> m_sourceFields;
-		map<int,PlotMark*> m_startMarks;
+		map<int,CPlotMarkMe*> m_startMarks;
 		bool m_selected;
 		_int64 m_selectedColor;
 		SelectPoint m_selectedPoint;
@@ -93,7 +93,7 @@ namespace MeLib
 		void MovePlot(float mouseY, float startY, int startIndex, int mouseBeginIndex, int mouseEndIndex, float pureV,
                       double max, double min, int dataCount, double *yAddValue, int *newIndex);
 	protected:
-		void ClearMarks(map<int,PlotMark*> *marks);
+		void ClearMarks(map<int,CPlotMarkMe*> *marks);
 		CNativeBaseMe* GetNative();
 		bool CreatePoint(const POINT& mp);
 		bool Create2PointsA(const POINT& mp);
@@ -102,23 +102,23 @@ namespace MeLib
 		bool Create3Points(const POINT& mp);
 		void CreateCandlePoint(int pos, int index, int close);
 		bool Create4CandlePoints(const POINT& mp);
-		double* GetCandleRange(map<int,PlotMark*> *pList, int *length);
+		double* GetCandleRange(map<int,CPlotMarkMe*> *pList, int *length);
 		POINT GetMouseOverPoint();
 		int GetIndex(const POINT& mp);
-		float* GetLineParams(PlotMark *markA, PlotMark *markB, int *length);
-		double* GetLRBandRange(map<int,PlotMark*> *marks, float *param);
-		float* GetLRParams(map<int,PlotMark*> *marks);
+		float* GetLineParams(CPlotMarkMe *markA, CPlotMarkMe *markB, int *length);
+		double* GetLRBandRange(map<int,CPlotMarkMe*> *marks, float *param);
+		float* GetLRParams(map<int,CPlotMarkMe*> *marks);
 		POINT GetMovingPoint();
 		double GetNumberValue(const POINT& mp);
 		int GetPx();
 		int GetPy();
-		RECT GetRectangle(PlotMark *markA, PlotMark *markB);
+		RECT GetRectangle(CPlotMarkMe *markA, CPlotMarkMe *markB);
 		float* GoldenRatioParams(double value1, double value2, int *length);
 		bool HLinesSelect(float *param, int length);
 		void Move(const POINT& mp);
 		virtual void OnPaint(CPaintMe *paint);
 		virtual void OnPaintGhost(CPaintMe *paint);
-		virtual void Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor);
+		virtual void Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor);
 		float PX(int index);
 		float PY(double value);
 		float PX(float x);
@@ -130,7 +130,7 @@ namespace MeLib
 		bool SelectLine(const POINT& mp, float x1, float y1, float x2, float y2);
 		bool SelectRay(const POINT& mp, float x1, float y1, float x2, float y2, float *pk, float *pb);
 		bool SelectRay(const POINT& mp, float x1, float y1, float x2, float y2);
-		ActionType SelectRect(const POINT& mp, PlotMark *markA, PlotMark *markB);
+		ActionType SelectRect(const POINT& mp, CPlotMarkMe *markA, CPlotMarkMe *markB);
 		bool SelectSegment(const POINT& mp, float x1, float y1, float x2, float y2);
 		bool SelectSine(const POINT& mp,float x1, float y1, float x2, float y2);
 		bool SelectTriangle(const POINT& mp, float x1, float y1, float x2, float y2, float x3, float y3);

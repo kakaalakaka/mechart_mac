@@ -11,7 +11,7 @@
 
 namespace MeLib
 {
-    class ToolTipA : public CLabelMe
+    class ToolTipMe : public CLabelMe
     {
     private:
         int m_timerID;
@@ -25,8 +25,8 @@ namespace MeLib
         int m_remainAutoPopDelay;
         int m_remainInitialDelay;
     public:
-        ToolTipA();
-        virtual ~ToolTipA();
+        ToolTipMe();
+        virtual ~ToolTipMe();
         virtual int GetAutoPopDelay();
         virtual void SetAutoPopDelay(int autoPopDelay);
         virtual int GetInitialDelay();

@@ -1831,8 +1831,8 @@ namespace MeLib
 							continue;
 						}
 						bool isSelect = false;
-						PolylineShape *tls = dynamic_cast<PolylineShape*>(bShape);
-						CandleShape *cs = dynamic_cast<CandleShape*>(bShape);
+						CPolylineShapeMe *tls = dynamic_cast<CPolylineShapeMe*>(bShape);
+						CCandleShapeMe *cs = dynamic_cast<CCandleShapeMe*>(bShape);
 						BarShape *barS = dynamic_cast<BarShape*>(bShape);
 						if (tls)
 						{
@@ -2535,7 +2535,7 @@ namespace MeLib
 		}
 	}
 
-	void CChartMe::OnPaintCandle(CPaintMe *paint, CDivMe *div, CandleShape *cs)
+	void CChartMe::OnPaintCandle(CPaintMe *paint, CDivMe *div, CCandleShapeMe *cs)
 	{
 		int x = 0, y = 0;
 		vector<POINT> points;
@@ -3007,7 +3007,7 @@ namespace MeLib
 		OnPaintCandleEx(paint, div, cs, visibleMaxIndex, visibleMax, visibleMinIndex, visibleMin);
 	}
 
-	void CChartMe::OnPaintCandleEx(CPaintMe *paint, CDivMe *div, CandleShape *cs, int visibleMaxIndex, double visibleMax, int visibleMinIndex, double visibleMin)
+	void CChartMe::OnPaintCandleEx(CPaintMe *paint, CDivMe *div, CCandleShapeMe *cs, int visibleMaxIndex, double visibleMax, int visibleMinIndex, double visibleMin)
 	{
 		if (m_dataSource->RowsCount() > 0)
         {
@@ -3566,8 +3566,8 @@ namespace MeLib
 					int rectCsY = y - sizeK.cy;
 					int rectCsH = sizeK.cy;
 					BarShape *bs = dynamic_cast<BarShape*>(m_movingShape);
-					CandleShape *cs = dynamic_cast<CandleShape*>(m_movingShape);
-					PolylineShape *tls = dynamic_cast<PolylineShape*>(m_movingShape);
+					CCandleShapeMe *cs = dynamic_cast<CCandleShapeMe*>(m_movingShape);
+					CPolylineShapeMe *tls = dynamic_cast<CPolylineShapeMe*>(m_movingShape);
                     if (bs)
                     {
 						RECT bsRectA = {rectCsX + 1, rectCsY + 10, rectCsX + 4, rectCsY + rectCsH - 1};
@@ -3625,7 +3625,7 @@ namespace MeLib
         }
     }
 
-	void CChartMe::OnPaintPolyline(CPaintMe *paint, CDivMe *div, PolylineShape *ls)
+	void CChartMe::OnPaintPolyline(CPaintMe *paint, CDivMe *div, CPolylineShapeMe *ls)
 	{
 		int x = 0, y = 0;
 		vector<POINT> points;
@@ -3913,9 +3913,9 @@ namespace MeLib
 			else
 			{
 				BarShape *bs = dynamic_cast<BarShape*>(bShape);
-				CandleShape *cs = dynamic_cast<CandleShape*>(bShape);
-				PolylineShape *ls = dynamic_cast<PolylineShape*>(bShape);
-				TextShape *ts = dynamic_cast<TextShape*>(bShape);
+				CCandleShapeMe *cs = dynamic_cast<CCandleShapeMe*>(bShape);
+				CPolylineShapeMe *ls = dynamic_cast<CPolylineShapeMe*>(bShape);
+				CTextShapeMe *ts = dynamic_cast<CTextShapeMe*>(bShape);
 				if (ls)
 				{
 					OnPaintPolyline(paint, div, ls);
@@ -3936,7 +3936,7 @@ namespace MeLib
         }
     }
 
-	void CChartMe::OnPaintText(CPaintMe *paint, CDivMe *div, TextShape *ts)
+	void CChartMe::OnPaintText(CPaintMe *paint, CDivMe *div, CTextShapeMe *ts)
 	{
 		String drawText = ts->GetText();
 		if (drawText.length() == 0)

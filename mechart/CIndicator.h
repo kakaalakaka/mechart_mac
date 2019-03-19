@@ -29,7 +29,7 @@ namespace MeLib
 		CVariableMe();
 		virtual ~CVariableMe();
 		BarShape *m_barShape;
-		CandleShape *m_candleShape;
+		CCandleShapeMe *m_candleShape;
 		String m_expression;
 		int m_field;
 		int m_fieldIndex;
@@ -39,7 +39,7 @@ namespace MeLib
 		CIndicatorMe *m_indicator;
 		int m_line;
 		PointShape *m_pointShape;
-		PolylineShape *m_polylineShape;
+		CPolylineShapeMe *m_polylineShape;
 		String m_name;
 		CVariableMe **m_parameters;
 		int m_parametersLength;
@@ -49,7 +49,7 @@ namespace MeLib
 		int m_tempFieldsLength;
 		int *m_tempFieldsIndex;
 		int m_tempFieldsIndexLength;
-		TextShape *m_textShape;
+		CTextShapeMe *m_textShape;
 		int m_type;
 		double m_value;
 		void CreateTempFields(int count);

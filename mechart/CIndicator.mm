@@ -1199,7 +1199,7 @@ _int64 CIndicatorMe::GetColor(const wstring& strColor)
         for(; sIter != shapes.end(); ++sIter)
         {
             CBaseShapeMe *shape = (*sIter);
-            if (typeid(*shape) == typeid(PolylineShape))
+            if (typeid(*shape) == typeid(CPolylineShapeMe))
             {
                 lineCount++;
             }
@@ -2859,7 +2859,7 @@ double CIndicatorMe::DRAWICON(CVariableMe *var)
     {
         CVariableMe *cond = var->m_parameters[0];
         CVariableMe *price = var->m_parameters[1];
-        PolylineShape *polylineShape;
+        CPolylineShapeMe *polylineShape;
         if (var->m_polylineShape)
         {
             polylineShape = var->m_polylineShape;
@@ -2886,7 +2886,7 @@ double CIndicatorMe::DRAWICON(CVariableMe *var)
             {
                 strStyle = var->m_expression;
             }
-            polylineShape = new PolylineShape();
+            polylineShape = new CPolylineShapeMe();
             m_div->AddShape(polylineShape);
             _int64 color = GetColor(strColor);
             polylineShape->SetAttachVScale(m_attachVScale);
@@ -2950,10 +2950,10 @@ double CIndicatorMe::DRAWKLINE(CVariableMe *var)
         CVariableMe *open = var->m_parameters[1];
         CVariableMe *low = var->m_parameters[2];
         CVariableMe *close = var->m_parameters[3];
-        CandleShape *candleShape;
+        CCandleShapeMe *candleShape;
         if (!var->m_candleShape)
         {
-            candleShape = new CandleShape();
+            candleShape = new CCandleShapeMe();
             candleShape->SetHighFieldText(high->m_fieldText);
             candleShape->SetOpenFieldText(open->m_fieldText);
             candleShape->SetLowFieldText(low->m_fieldText);
@@ -3054,14 +3054,14 @@ double CIndicatorMe::DRAWTEXT(CVariableMe *var)
         CVariableMe *cond = var->m_parameters[0];
         CVariableMe *price = var->m_parameters[1];
         CVariableMe *text = var->m_parameters[2];
-        TextShape *textShape = 0;
+        CTextShapeMe *textShape = 0;
         if (var->m_textShape)
         {
             textShape = var->m_textShape;
         }
         else
         {
-            textShape = new TextShape();
+            textShape = new CTextShapeMe();
             textShape->SetAttachVScale(m_attachVScale);
             textShape->SetText(GetText(text));
             var->CreateTempFields(1);
@@ -3746,7 +3746,7 @@ double CIndicatorMe::POLYLINE(CVariableMe *var)
     {
         CVariableMe *cond = var->m_parameters[0];
         CVariableMe *price = var->m_parameters[1];
-        PolylineShape *polylineShape;
+        CPolylineShapeMe *polylineShape;
         if (!var->m_polylineShape)
         {
             wstring strColor = L"COLORAUTO";
@@ -3768,7 +3768,7 @@ double CIndicatorMe::POLYLINE(CVariableMe *var)
                     dotLine = true;
                 }
             }
-            polylineShape = new PolylineShape();
+            polylineShape = new CPolylineShapeMe();
             m_div->AddShape(polylineShape);
             polylineShape->SetAttachVScale(m_attachVScale);
             polylineShape->SetColor(GetColor(strColor));

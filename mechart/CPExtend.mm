@@ -21,10 +21,10 @@ ActionType P001::GetAction()
 			return nO;
 		}
 		POINT mouseOverPoint = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
-		map<int,PlotMark*>::iterator sIter3 = CPlotBaseMe::m_marks.find(3);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+		map<int,CPlotMarkMe*>::iterator sIter3 = CPlotBaseMe::m_marks.find(3);
 		int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		int cIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter2->second->Key);
@@ -111,13 +111,13 @@ bool P001::OnCreate(const POINT& mp)
 	bool flag = CPlotBaseMe::Create4CandlePoints(mp);
 	if (flag)
 	{
-		map<int,PlotMark*>::iterator sIter = CPlotBaseMe::m_marks.find(1);
-		PlotMark* mark = sIter->second;
-		PlotMark* newMark = new PlotMark(mark->Index, mark->Key, CPlotBaseMe::GetNumberValue(mp));
+		map<int,CPlotMarkMe*>::iterator sIter = CPlotBaseMe::m_marks.find(1);
+		CPlotMarkMe* mark = sIter->second;
+		CPlotMarkMe* newMark = new CPlotMarkMe(mark->Index, mark->Key, CPlotBaseMe::GetNumberValue(mp));
 		delete mark;
 		mark = 0;
 		sIter->second = newMark;
-		//m_marks[1] = new PlotMark(m_marks[1].Index, m_marks[1].Key, GetNumberValue(mp));
+		//m_marks[1] = new CPlotMarkMe(m_marks[1].Index, m_marks[1].Key, GetNumberValue(mp));
 	}
 	return flag;
 }
@@ -137,17 +137,17 @@ void P001::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
-		PlotMark *mark = new PlotMark(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		CPlotMarkMe *mark = new CPlotMarkMe(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, mark));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
-		mark = new PlotMark(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
+		mark = new CPlotMarkMe(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, mark));
 		sIterPlot = CPlotBaseMe::m_marks.find(2);
-		mark = new PlotMark(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
+		mark = new CPlotMarkMe(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
 		CPlotBaseMe::m_startMarks.insert(make_pair(2, mark));
 		sIterPlot = CPlotBaseMe::m_marks.find(3);
-		mark = new PlotMark(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
+		mark = new CPlotMarkMe(sIterPlot->second->Index, sIterPlot->second->Key, sIterPlot->second->Value);
 		CPlotBaseMe::m_startMarks.insert(make_pair(3, mark));
 		//m_startMarks[0] = m_marks[0];
 		//m_startMarks[1] = m_marks[1];
@@ -156,16 +156,16 @@ void P001::OnMoveStart()
 	}
 }
 
-void P001::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P001::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
 	{
 		map<String,int>::iterator sIterClose = CPlotBaseMe::m_sourceFields.find(L"CLOSE");
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
-		map<int,PlotMark*>::iterator sIter3 = CPlotBaseMe::m_marks.find(3);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+		map<int,CPlotMarkMe*>::iterator sIter3 = CPlotBaseMe::m_marks.find(3);
 		int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		int cIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter2->second->Key);
@@ -234,14 +234,14 @@ ActionType P002::GetAction()
 	if (size > 0)
 	{
 		POINT mouseOverPoint = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
-		vector<PlotMark**> list;
-		PlotMark** arry1 = new PlotMark*[2]; 
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+		vector<CPlotMarkMe**> list;
+		CPlotMarkMe** arry1 = new CPlotMarkMe*[2];
 		arry1[0] = sIter0->second;
 		arry1[1] = sIter1->second;//{ sIter0->second, sIter1->second };
-		PlotMark** arry2 = new PlotMark*[2];
+		CPlotMarkMe** arry2 = new CPlotMarkMe*[2];
 		arry2[0] = sIter0->second;
 		arry2[1] = sIter2->second; //{ sIter0->second, sIter2->second };
 		list.push_back(arry1);
@@ -249,8 +249,8 @@ ActionType P002::GetAction()
 		int count = (int)list.size();
 		for (int i = 0; i < count; i++)
 		{
-			PlotMark *markA = list[i][0];
-			PlotMark *markB = list[i][1];
+			CPlotMarkMe *markA = list[i][0];
+			CPlotMarkMe *markB = list[i][1];
 			int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(markA->Key);
 			int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(markB->Key);
 			float x1 = CPlotBaseMe::PX(bIndex);
@@ -330,7 +330,7 @@ void P002::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -342,22 +342,22 @@ void P002::OnMoveStart()
 	}
 }
 
-void P002::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P002::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
 	{
-		//List<PlotMark[]> marks = new List<PlotMark[]>();
-		//marks.Add(new PlotMark[] { pList[0], pList[1] });
-		//marks.Add(new PlotMark[] { pList[0], pList[2] });
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-		map<int,PlotMark*>::iterator sIter2 = pList->find(2);
-		vector<PlotMark**> marks;
-		PlotMark** arry1 = new PlotMark*[2]; 
+		//List<CPlotMarkMe[]> marks = new List<CPlotMarkMe[]>();
+		//marks.Add(new CPlotMarkMe[] { pList[0], pList[1] });
+		//marks.Add(new CPlotMarkMe[] { pList[0], pList[2] });
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
+		vector<CPlotMarkMe**> marks;
+		CPlotMarkMe** arry1 = new CPlotMarkMe*[2];
 		arry1[0] = sIter0->second;
 		arry1[1] = sIter1->second;//{ sIter0->second, sIter1->second };
-		PlotMark** arry2 = new PlotMark*[2];
+		CPlotMarkMe** arry2 = new CPlotMarkMe*[2];
 		arry2[0] = sIter0->second;
 		arry2[1] = sIter2->second; //{ sIter0->second, sIter2->second };
 		marks.push_back(arry1);
@@ -366,8 +366,8 @@ void P002::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 		int count = (int)marks.size();
 		for (int i = 0; i < count; i++)
 		{
-			PlotMark *markA = marks[i][0];
-			PlotMark *markB = marks[i][1];
+			CPlotMarkMe *markA = marks[i][0];
+			CPlotMarkMe *markB = marks[i][1];
 			float y1 = CPlotBaseMe::PY(markA->Value);
 			float y2 = CPlotBaseMe::PY(markB->Value);
 			int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(markA->Key);
@@ -428,9 +428,9 @@ ActionType P003::GetAction()
 		return nO;
 	}
 	POINT mp = CPlotBaseMe::GetMouseOverPoint();
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-	map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 	float y1 = PY(sIter0->second->Value);
 	float y2 = PY(sIter1->second->Value);
 	float y3 = PY(sIter2->second->Value);
@@ -486,7 +486,7 @@ void P003::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -498,14 +498,14 @@ void P003::OnMoveStart()
 	}
 }
 
-void P003::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P003::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-		map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -545,8 +545,8 @@ ActionType P004::GetAction()
 	if (size > 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -604,7 +604,7 @@ void P004::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -613,13 +613,13 @@ void P004::OnMoveStart()
 	}
 }
 
-void P004::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P004::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		int y1 = (int)CPlotBaseMe::PY(sIter0->second->Value);
 		int y2 = (int)CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -670,7 +670,7 @@ ActionType P005::GetAction()
 	int size = (int)CPlotBaseMe::m_marks.size();
 	if (size != 0)
 	{
-		map<int, PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int, CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 		double num = sIter0->second->Value;
 		int rowIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		float x1 = CPlotBaseMe::PX(rowIndex);
@@ -700,17 +700,17 @@ void P005::OnMoveStart()
 	if (m_action != ActionType_NO)
 	{
 		CPlotBaseMe::SetCursor(CursorsA_Hand);
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 	}
 }
 
-void P005::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P005::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 		double num = sIter0->second->Value;
 		int rowIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int x = (int) CPlotBaseMe::PX(rowIndex);
@@ -739,13 +739,13 @@ void P005::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float* P006::GetDropLineParams(map<int, PlotMark*> *pList)
+float* P006::GetDropLineParams(map<int, CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() == 0)
 	{
 		return 0;
 	}
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 	float num = CPlotBaseMe::PY(sIter0->second->Value);
 	int rowIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	float x1 = CPlotBaseMe::PX(rowIndex);
@@ -792,13 +792,13 @@ void P006::OnMoveStart()
 	if (CPlotBaseMe::m_action != ActionType_NO)
 	{
 		CPlotBaseMe::SetCursor(CursorsA_Hand);
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		//CPlotBaseMe::m_startMarks[0] = CPlotBaseMe::m_marks[0];
 	}
 }
 
-void P006::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P006::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -826,8 +826,8 @@ ActionType P009::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mouseOverPoint = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		double fValue = sIter0->second->Value;
 		double eValue = sIter1->second->Value;
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -907,7 +907,7 @@ void P009::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_Hand);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -916,12 +916,12 @@ void P009::OnMoveStart()
 	}
 }
 
-void P009::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P009::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		double fValue = sIter0->second->Value;
 		double eValue = sIter1->second->Value;
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -969,14 +969,14 @@ void P009::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P010::FibonacciEllipseParam(map<int, PlotMark*> *pList, int *length)
+float* P010::FibonacciEllipseParam(map<int, CPlotMarkMe*> *pList, int *length)
 {
 	if ((int)pList->size() == 0)
 	{
 		return 0;
 	}
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-	map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	float x1 = CPlotBaseMe::PX(bIndex);
@@ -1068,7 +1068,7 @@ void P010::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -1085,7 +1085,7 @@ void P010::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P010::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P010::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() > 0)
 	{
@@ -1142,8 +1142,8 @@ ActionType P011::GetAction()
 		return nO;
 	}
 	POINT mouseOverPoint = CPlotBaseMe::GetMouseOverPoint();
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 	float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -1198,7 +1198,7 @@ void P011::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -1215,12 +1215,12 @@ void P011::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P011::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P011::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() > 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -1274,14 +1274,14 @@ void P011::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-vector<int> P012::GetFibonacciTimeZonesParam(map<int,PlotMark*> *pList)
+vector<int> P012::GetFibonacciTimeZonesParam(map<int,CPlotMarkMe*> *pList)
 {
 	vector<int> fValueList;
 	if ((int)pList->size() == 0)
 	{
 		return fValueList;
 	}
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 	double fValue = sIter0->second->Value;
 	int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int pos = 1;
@@ -1341,13 +1341,13 @@ void P012::OnMoveStart()
 	if (CPlotBaseMe::m_action != ActionType_NO)
 	{
 		CPlotBaseMe::SetCursor(CursorsA_Hand);
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		//CPlotBaseMe::m_startMarks[0] = CPlotBaseMe::m_marks[0];
 	}
 }
 
-void P012::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P012::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -1390,8 +1390,8 @@ ActionType P014::GetAction()
 
 ActionType P014::GetClickStatus()
 {
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 
 	POINT mouseOverPoint = CPlotBaseMe::GetMouseOverPoint();
 	RECT rectangle = CPlotBaseMe::GetRectangle(sIter0->second, sIter1->second);
@@ -1560,7 +1560,7 @@ void P014::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -1594,12 +1594,12 @@ void P014::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P014::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P014::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		RECT rect = CPlotBaseMe::GetRectangle(sIter0->second, sIter1->second);
 		int leftVScaleWidth = CPlotBaseMe::GetChart()->GetLeftVScaleWidth();
 		int titleHeight = CPlotBaseMe::GetDiv()->GetTitleBar()->GetHeight();
@@ -1690,8 +1690,8 @@ ActionType P016::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -1781,7 +1781,7 @@ void P016::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_Hand);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -1798,12 +1798,12 @@ void P016::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P016::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P016::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -1884,8 +1884,8 @@ ActionType P017::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -1937,7 +1937,7 @@ void P017::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -1951,14 +1951,14 @@ void P017::OnMoving()
 	{
 	case ActionType_MOVE:
 		{
-			map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_startMarks.find(0);
-			map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_startMarks.find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_startMarks.find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_startMarks.find(1);
 			double num = movingPoint.y - m_startPoint.y;
 			double visibleMax = CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMax();
 			double visibleMin = CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMin();
 			double num4 = (num / ((double) CPlotBaseMe::GetWorkingAreaHeight())) * (visibleMin - visibleMax);
-			CPlotBaseMe::m_marks[0] = new PlotMark(0, sIter0->second->Key, sIter0->second->Value + num4);
-			CPlotBaseMe::m_marks[1] = new PlotMark(1, sIter1->second->Key, sIter1->second->Value + num4);
+			CPlotBaseMe::m_marks[0] = new CPlotMarkMe(0, sIter0->second->Key, sIter0->second->Value + num4);
+			CPlotBaseMe::m_marks[1] = new CPlotMarkMe(1, sIter1->second->Key, sIter1->second->Value + num4);
 			return;
 		}
 	case ActionType_AT1:
@@ -1979,12 +1979,12 @@ void P017::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P017::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P017::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -2019,7 +2019,7 @@ ActionType P018::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 		POINT mouseOverPoint = CPlotBaseMe::GetMouseOverPoint();
 		float num = CPlotBaseMe::PY(sIter0->second->Value);
 		if ((mouseOverPoint.y >= (num - (CPlotBaseMe::m_lineWidth * 2.5))) && (mouseOverPoint.y <= (num + (CPlotBaseMe::m_lineWidth * 2.5))))
@@ -2036,7 +2036,7 @@ bool P018::OnCreate(const POINT& mp)
 	{
 		CPlotBaseMe::ClearMarks(&m_marks);
 		double numberValue = CPlotBaseMe::GetNumberValue(mp);
-		CPlotBaseMe::m_marks[0] = new PlotMark(0, 0.0, numberValue);
+		CPlotBaseMe::m_marks[0] = new CPlotMarkMe(0, 0.0, numberValue);
 		return true;
 	}
 	return false;
@@ -2057,14 +2057,14 @@ void P018::OnMoveStart()
 void P018::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
-	CPlotBaseMe::m_marks.insert(make_pair(0, new PlotMark(0, 0.0, CPlotBaseMe::GetNumberValue(movingPoint))));
+	CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, 0.0, CPlotBaseMe::GetNumberValue(movingPoint))));
 }
 
-void P018::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P018::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		CPlotBaseMe::DrawLine(paint, lineColor, CPlotBaseMe::m_lineWidth, CPlotBaseMe::m_lineStyle, (float)0, (float)y1, (float) CPlotBaseMe::GetWorkingAreaWidth(), (float)y1);
 	}
@@ -2108,8 +2108,8 @@ ActionType P019::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() > 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -2161,7 +2161,7 @@ void P019::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -2175,14 +2175,14 @@ void P019::OnMoving()
 	{
 	case ActionType_MOVE:
 		{
-			map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-			map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 			double num = movingPoint.y - m_startPoint.y;
 			double visibleMax = CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMax();
 			double visibleMin = CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMin();
 			double num4 = (num / ((double) CPlotBaseMe::GetWorkingAreaHeight())) * (visibleMin - visibleMax);
-			CPlotBaseMe::m_marks.insert(make_pair(0, new PlotMark(0, sIter0->second->Key, sIter0->second->Value + num4)));
-			CPlotBaseMe::m_marks.insert(make_pair(1, new PlotMark(1, sIter1->second->Key, sIter1->second->Value + num4)));
+			CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, sIter0->second->Key, sIter0->second->Value + num4)));
+			CPlotBaseMe::m_marks.insert(make_pair(1, new CPlotMarkMe(1, sIter1->second->Key, sIter1->second->Value + num4)));
 			return;
 		}
 	case ActionType_AT1:
@@ -2203,12 +2203,12 @@ void P019::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P019::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P019::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -2260,8 +2260,8 @@ ActionType P020::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
@@ -2305,19 +2305,19 @@ void P020::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
 	}
 }
 
-void P020::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P020::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -2363,8 +2363,8 @@ ActionType P021::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
@@ -2440,7 +2440,7 @@ void P021::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -2460,8 +2460,8 @@ void P021::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -2490,15 +2490,15 @@ void P021::OnMoving()
 	}
 }
 
-void P021::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P021::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
 		float *param = CPlotBaseMe::GetLRParams(pList);
 		if (param)
 		{
-			map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-			map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 			int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 			int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 			float x1 = CPlotBaseMe::PX(bIndex);
@@ -2542,8 +2542,8 @@ ActionType P022::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
@@ -2620,7 +2620,7 @@ void P022::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -2640,8 +2640,8 @@ void P022::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -2671,15 +2671,15 @@ void P022::OnMoving()
 
 }
 
-void P022::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P022::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
 		float *param = CPlotBaseMe::GetLRParams(pList);
 		if (param)
 		{
-			map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-			map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 			int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 			int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 			float x1 = CPlotBaseMe::PX(bIndex);
@@ -2735,8 +2735,8 @@ ActionType P023::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		float x1 = CPlotBaseMe::PX(bIndex);
@@ -2795,7 +2795,7 @@ void P023::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -2815,8 +2815,8 @@ void P023::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -2845,15 +2845,15 @@ void P023::OnMoving()
 	}
 }
 
-void P023::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P023::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
 		float *param = CPlotBaseMe::GetLRParams(pList);
 		if (param)
 		{
-			map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-			map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 			int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 			int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 			float x1 = CPlotBaseMe::PX(bIndex);
@@ -2900,7 +2900,7 @@ void P024::NullPoint(float x1, float y1, float x2, float y2, float *nullX, float
 	*nullY = (*nullX * k1) + b1;
 }
 
-double* P024::GetNullPointParams(map<int,PlotMark*> *pList)
+double* P024::GetNullPointParams(map<int,CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() == 0
 		|| (int)CPlotBaseMe::m_sourceFields.size() == 0
@@ -2908,8 +2908,8 @@ double* P024::GetNullPointParams(map<int,PlotMark*> *pList)
 	{
 		return 0;
 	}
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-	map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 	map<String,int>::iterator sIterClose = CPlotBaseMe::m_sourceFields.find(L"CLOSE");
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
@@ -2946,8 +2946,8 @@ ActionType P024::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		double *closeParam = GetNullPointParams(&m_marks);
@@ -3015,7 +3015,7 @@ void P024::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -3024,12 +3024,12 @@ void P024::OnMoveStart()
 	}
 }
 
-void P024::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P024::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		double *closeParam = GetNullPointParams(pList);
@@ -3057,13 +3057,13 @@ void P024::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P025::GetParallelParams(map<int,PlotMark*> *pList, int *length)
+float* P025::GetParallelParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-		map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -3102,9 +3102,9 @@ ActionType P025::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -3184,7 +3184,7 @@ void P025::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -3197,13 +3197,13 @@ void P025::OnMoveStart()
 	}
 }
 
-void P025::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P025::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-		map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -3284,8 +3284,8 @@ ActionType P026::GetAction()
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -3338,7 +3338,7 @@ void P026::OnMoveStart()
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
 
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -3354,14 +3354,14 @@ void P026::OnMoving()
 	{
 	case ActionType_MOVE:
 		{
-			map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_startMarks.find(0);
-			map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_startMarks.find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_startMarks.find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_startMarks.find(1);
 			double subY = mp.y - m_startPoint.y;
 			double maxValue = CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMax();
 			double minValue = CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMin();
 			double yAddValue = (subY / ((double)CPlotBaseMe::GetWorkingAreaHeight())) * (minValue - maxValue);
-			CPlotBaseMe::m_marks[0] = new PlotMark(0, sIter0->second->Key, sIter0->second->Value + yAddValue);
-			CPlotBaseMe::m_marks[1] = new PlotMark(1, sIter1->second->Key, sIter1->second->Value + yAddValue);
+			CPlotBaseMe::m_marks[0] = new CPlotMarkMe(0, sIter0->second->Key, sIter0->second->Value + yAddValue);
+			CPlotBaseMe::m_marks[1] = new CPlotMarkMe(1, sIter1->second->Key, sIter1->second->Value + yAddValue);
 			return;
 		}
 	case ActionType_AT1:
@@ -3382,12 +3382,12 @@ void P026::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P026::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P026::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -3437,7 +3437,7 @@ ActionType P027::GetAction()
 			if (CPlotBaseMe::SelectPoint(mp, x1, y))
 			{
 				action = ActionType_AT1;
-				CPlotBaseMe::m_marks[0] = new PlotMark(0, CPlotBaseMe::m_dataSource->GetXValue(rI), 0.0);
+				CPlotBaseMe::m_marks[0] = new CPlotMarkMe(0, CPlotBaseMe::m_dataSource->GetXValue(rI), 0.0);
 				m_beginPeriod = m_period;
 				return action;
 			}
@@ -3450,14 +3450,14 @@ ActionType P027::GetAction()
 	return action;
 }
 
-vector<double> P027::GetPLParams(map<int,PlotMark*> *pList)
+vector<double> P027::GetPLParams(map<int,CPlotMarkMe*> *pList)
 {
 	vector<double> fValueList;
 	if ((int)pList->size() == 0)
 	{
 		return fValueList;
 	}
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 	double fValue = sIter0->second->Value;
 	int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -3481,7 +3481,7 @@ bool P027::OnCreate(const POINT& mp)
 	double y = CPlotBaseMe::GetNumberValue(mp);
 	double date = CPlotBaseMe::m_dataSource->GetXValue(currentIndex);
 	CPlotBaseMe::ClearMarks(&m_marks);
-	CPlotBaseMe::m_marks[0] = new PlotMark(0, date, y);
+	CPlotBaseMe::m_marks[0] = new CPlotMarkMe(0, date, y);
 	CChartMe *chart = CPlotBaseMe::GetChart();
 	m_period = chart->GetMaxVisibleRecord() / 10;
 	if (m_period < 1)
@@ -3506,7 +3506,7 @@ void P027::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_Hand);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		//CPlotBaseMe::m_startMarks[0] = CPlotBaseMe::m_marks[0];
 	}
@@ -3543,7 +3543,7 @@ void P027::OnMoving()
 	}
 }
 
-void P027::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P027::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3574,7 +3574,7 @@ ActionType P028::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		double fValue = sIter0->second->Value;
 		int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -3606,7 +3606,7 @@ void P028::OnMoveStart()
 	}
 }
 
-void P028::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P028::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3614,7 +3614,7 @@ void P028::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 		int workingAreaHeight = CPlotBaseMe::GetWorkingAreaHeight();
 		if ((workingAreaWidth > 0) && (workingAreaHeight > 0))
 		{
-			map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+			map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 			double fValue = sIter0->second->Value;
 			int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 			float x1 = CPlotBaseMe::PX(aIndex);
@@ -3646,8 +3646,8 @@ ActionType P029::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		CPlotBaseMe::PY(sIter0->second->Value);
 		CPlotBaseMe::PY(sIter1->second->Value);
@@ -3717,7 +3717,7 @@ void P029::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -3726,12 +3726,12 @@ void P029::OnMoveStart()
 	}
 }
 
-void P029::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P029::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		CPlotBaseMe::PY(sIter0->second->Value);
 		CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -3788,13 +3788,13 @@ P030::P030()
 	SetPlotType(L"RASELINE");
 }
 
-float* P030::GetRaseLineParams(map<int,PlotMark*> *pList)
+float* P030::GetRaseLineParams(map<int,CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() != 0)
 	{
 		return 0;
 	}
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 	float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	float x1 = CPlotBaseMe::PX(bIndex);
@@ -3836,13 +3836,13 @@ void P030::OnMoveStart()
 	if (CPlotBaseMe::m_action != ActionType_NO)
 	{
 		CPlotBaseMe::SetCursor(CursorsA_Hand);
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		//CPlotBaseMe::m_startMarks[0] = CPlotBaseMe::m_marks[0];
 	}
 }
 
-void P030::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P030::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3870,8 +3870,8 @@ ActionType P031::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
@@ -3932,7 +3932,7 @@ void P031::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -3941,12 +3941,12 @@ void P031::OnMoveStart()
 	}
 }
 
-void P031::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P031::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -3982,8 +3982,8 @@ ActionType P032::GetAction()
 		return action;
 	}
 	POINT mp = CPlotBaseMe::GetMouseOverPoint();
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	return CPlotBaseMe::SelectRect(mp, sIter0->second, sIter1->second);
 }
 
@@ -4042,7 +4042,7 @@ void P032::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -4077,12 +4077,12 @@ void P032::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P032::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P032::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		RECT rectangle = CPlotBaseMe::GetRectangle(sIter0->second, sIter1->second);
 		if (((rectangle.right - rectangle.left) > 0) && ((rectangle.bottom - rectangle.top) > 0))
 		{
@@ -4110,8 +4110,8 @@ ActionType P033::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mouseOverPoint = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -4171,7 +4171,7 @@ void P033::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -4180,12 +4180,12 @@ void P033::OnMoveStart()
 	}
 }
 
-void P033::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P033::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -4213,8 +4213,8 @@ ActionType P034::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -4254,10 +4254,10 @@ bool P034::OnCreate(const POINT& mp)
 				double sDate = CPlotBaseMe::m_dataSource->GetXValue(eIndex);
 				CPlotBaseMe::ClearMarks(&m_marks);
 				double numberValue = CPlotBaseMe::GetNumberValue(mp);
-				CPlotBaseMe::m_marks.insert(make_pair(0, new PlotMark(0, fDate,
+				CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, fDate,
 					numberValue + ((CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMax() 
 					- CPlotBaseMe::m_div->GetVScale(CPlotBaseMe::m_attachVScale)->GetVisibleMin()) / 4.0))));
-				CPlotBaseMe::m_marks.insert(make_pair(1, new PlotMark(1, sDate, numberValue)));
+				CPlotBaseMe::m_marks.insert(make_pair(1, new CPlotMarkMe(1, sDate, numberValue)));
 				return true;
 			}
 		}
@@ -4285,7 +4285,7 @@ void P034::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_Hand);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -4307,8 +4307,8 @@ void P034::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -4337,12 +4337,12 @@ void P034::OnMoving()
 	}
 }
 
-void P034::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P034::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		double fValue = sIter0->second->Value;
 		double eValue = sIter1->second->Value;
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -4390,8 +4390,8 @@ ActionType P035::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -4473,7 +4473,7 @@ void P035::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -4490,13 +4490,13 @@ void P035::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P035::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P035::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -4543,13 +4543,13 @@ void P035::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double P036::GetSEChannelSD(map<int,PlotMark*> *pList)
+double P036::GetSEChannelSD(map<int,CPlotMarkMe*> *pList)
 {
 	map<String,int>::iterator sIter = CPlotBaseMe::m_sourceFields.find(L"CLOSE");
 	if (sIter != CPlotBaseMe::m_sourceFields.end())
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = (CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key) - bIndex) + 1;
 		if (eIndex > 0)
@@ -4582,8 +4582,8 @@ ActionType P036::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		float x1 = CPlotBaseMe::PX(bIndex);
@@ -4660,7 +4660,7 @@ void P036::OnMoveStart()
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
 
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -4682,8 +4682,8 @@ void P036::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -4712,13 +4712,13 @@ void P036::OnMoving()
 	}
 }
 
-void P036::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P036::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
 		CChartMe *chart = CPlotBaseMe::GetChart();
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		float x1 = CPlotBaseMe::PX(chart->GetX(bIndex));
@@ -4777,8 +4777,8 @@ ActionType P037::GetAction()
 	{
 		return action;
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	POINT mp = CPlotBaseMe::GetMouseOverPoint();
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
@@ -4840,7 +4840,7 @@ void P037::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -4849,12 +4849,12 @@ void P037::OnMoveStart()
 	}
 }
 
-void P037::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P037::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		float x1 = CPlotBaseMe::PX(bIndex);
@@ -4892,13 +4892,13 @@ void P037::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P038::GetSymmetricTriangleParams(map<int,PlotMark*> *pList)
+float* P038::GetSymmetricTriangleParams(map<int,CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-		map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -4938,9 +4938,9 @@ ActionType P038::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -5019,7 +5019,7 @@ void P038::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -5031,13 +5031,13 @@ void P038::OnMoveStart()
 	}
 }
 
-void P038::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P038::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-		map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -5083,7 +5083,7 @@ void P038::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double* P041::GetTimeRulerParams(map<int,PlotMark*> *pList, int *length)
+double* P041::GetTimeRulerParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
 
 	if ((int)pList->size() == 0)
@@ -5091,8 +5091,8 @@ double* P041::GetTimeRulerParams(map<int,PlotMark*> *pList, int *length)
 		return NULL;
 	}
 	CChartMe *chart = CPlotBaseMe::GetChart();
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-	map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
     double bHigh = chart->DivMaxOrMin(bIndex, CPlotBaseMe::m_div, 0);
@@ -5119,8 +5119,8 @@ ActionType P041::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -5205,7 +5205,7 @@ void P041::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -5228,8 +5228,8 @@ void P041::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	switch (CPlotBaseMe::m_action)
 	{
 	case ActionType_MOVE:
@@ -5237,23 +5237,23 @@ void P041::OnMoving()
 		return;
 
 	case ActionType_AT1:
-		CPlotBaseMe::m_marks.insert(make_pair(0, new PlotMark(0, CPlotBaseMe::m_dataSource->GetXValue(mouseIndex), y)));
-		CPlotBaseMe::m_marks.insert(make_pair(1, new PlotMark(1, sIter1->second->Key, y)));
+		CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, CPlotBaseMe::m_dataSource->GetXValue(mouseIndex), y)));
+		CPlotBaseMe::m_marks.insert(make_pair(1, new CPlotMarkMe(1, sIter1->second->Key, y)));
 		return;
 
 	case ActionType_AT2:
-		CPlotBaseMe::m_marks.insert(make_pair(1, new PlotMark(0, CPlotBaseMe::m_dataSource->GetXValue(mouseIndex), y)));
-		CPlotBaseMe::m_marks.insert(make_pair(0, new PlotMark(0, sIter0->second->Key, y)));
+		CPlotBaseMe::m_marks.insert(make_pair(1, new CPlotMarkMe(0, CPlotBaseMe::m_dataSource->GetXValue(mouseIndex), y)));
+		CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, sIter0->second->Key, y)));
 		return;
 	}
 }
 
-void P041::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P041::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -5321,9 +5321,9 @@ ActionType P042::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -5368,15 +5368,15 @@ bool P042::OnCreate(const POINT& mp)
 	double y = CPlotBaseMe::GetNumberValue(mp);
 	double date = CPlotBaseMe::m_dataSource->GetXValue(currentIndex);
 	CPlotBaseMe::ClearMarks(&m_startMarks);
-	CPlotBaseMe::m_marks.insert(make_pair(0, new PlotMark(0, date, y)));
+	CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, date, y)));
 	int si = currentIndex + 10;
 	CChartMe *chart = CPlotBaseMe::GetChart();
 	if (si > chart->GetLastVisibleIndex())
 	{
 		si = chart->GetLastVisibleIndex();
 	}
-	CPlotBaseMe::m_marks.insert(make_pair(1, new PlotMark(1, CPlotBaseMe::m_dataSource->GetXValue(si), y)));
-	CPlotBaseMe::m_marks.insert(make_pair(2, new PlotMark(2, date, y)));
+	CPlotBaseMe::m_marks.insert(make_pair(1, new CPlotMarkMe(1, CPlotBaseMe::m_dataSource->GetXValue(si), y)));
+	CPlotBaseMe::m_marks.insert(make_pair(2, new CPlotMarkMe(2, date, y)));
 	return true;
 }
 
@@ -5396,7 +5396,7 @@ void P042::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -5416,13 +5416,13 @@ void P042::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P042::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P042::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-		map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -5468,7 +5468,7 @@ ActionType P043::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 		double fValue = sIter0->second->Value;
 		int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		float x1 = CPlotBaseMe::PX(aIndex);
@@ -5498,17 +5498,17 @@ void P043::OnMoveStart()
 	if (CPlotBaseMe::m_action != ActionType_NO)
 	{
 		CPlotBaseMe::SetCursor(CursorsA_Hand);
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		//CPlotBaseMe::m_startMarks[0] = CPlotBaseMe::m_marks[0];
 	}
 }
 
-void P043::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P043::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 		double fValue = sIter0->second->Value;
 		int aIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int x = (int) CPlotBaseMe::PX(aIndex);
@@ -5551,7 +5551,7 @@ ActionType P044::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		float x1 = CPlotBaseMe::PX(bIndex);
 		if ((mp.x >= (x1 - (CPlotBaseMe::m_lineWidth * 2.5))) && (mp.x <= (x1 + (CPlotBaseMe::m_lineWidth * 2.5))))
@@ -5576,17 +5576,17 @@ void P044::OnMoveStart()
 	if (CPlotBaseMe::m_action != ActionType_NO)
 	{
 		CPlotBaseMe::SetCursor(CursorsA_Hand);
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		//CPlotBaseMe::m_startMarks[0] = CPlotBaseMe::m_marks[0];
 	}
 }
 
-void P044::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P044::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		float x1 = CPlotBaseMe::PX(bIndex);
 		CPlotBaseMe::DrawLine(paint, lineColor, CPlotBaseMe::m_lineWidth, CPlotBaseMe::m_lineStyle, (float)x1, (float)0, (float)x1, (float) CPlotBaseMe::GetWorkingAreaHeight());
@@ -5650,8 +5650,8 @@ ActionType P045::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		int length = 0;
 		float *waveRulerParams = GetWaveRulerParams(sIter0->second->Value, sIter1->second->Value, &length);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -5716,7 +5716,7 @@ void P045::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeWE);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -5733,12 +5733,12 @@ void P045::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P045::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P045::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -5766,7 +5766,7 @@ void P045::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double* P046::GetTironelLevelsParams(map<int,PlotMark*> *pList, int *length)
+double* P046::GetTironelLevelsParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
 	*length = 0;
 	double *candleRange = CPlotBaseMe::GetCandleRange(pList, length);
@@ -5797,8 +5797,8 @@ ActionType P046::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		CPlotBaseMe::PY(sIter0->second->Value);
 		CPlotBaseMe::PY(sIter1->second->Value);
@@ -5871,7 +5871,7 @@ void P046::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -5880,12 +5880,12 @@ void P046::OnMoveStart()
 	}
 }
 
-void P046::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P046::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		CPlotBaseMe::PY(sIter0->second->Value);
 		CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -5928,7 +5928,7 @@ void P046::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double P047::GetRRCRange(map<int,PlotMark*> *pList, float *param)
+double P047::GetRRCRange(map<int,CPlotMarkMe*> *pList, float *param)
 {
 	map<String,int>::iterator sIterHigh = CPlotBaseMe::m_sourceFields.find(L"HIGH");
 	map<String,int>::iterator sIterLow = CPlotBaseMe::m_sourceFields.find(L"LOW");
@@ -5941,8 +5941,8 @@ double P047::GetRRCRange(map<int,PlotMark*> *pList, float *param)
 	}
 	float a = param[0];
 	float b = param[1];
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-	map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	double upSubValue = 0.0;
@@ -5992,8 +5992,8 @@ ActionType P047::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
@@ -6071,7 +6071,7 @@ void P047::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -6091,8 +6091,8 @@ void P047::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -6121,7 +6121,7 @@ void P047::OnMoving()
 	}
 }
 
-void P047::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P047::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6130,8 +6130,8 @@ void P047::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 		{
 			float a = lRParams[0];
 			float b = lRParams[1];
-			map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-			map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 			int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 			int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 			float x1 = CPlotBaseMe::PX(bIndex);
@@ -6141,7 +6141,7 @@ void P047::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 			float y1 = CPlotBaseMe::PY(leftValue);
 			float y2 = CPlotBaseMe::PY(rightValue);
 			int length = 0;
-			float *lineParams = CPlotBaseMe::GetLineParams(new PlotMark(0, sIter0->second->Key, leftValue), new PlotMark(1, sIter1->second->Key, rightValue), &length);
+			float *lineParams = CPlotBaseMe::GetLineParams(new CPlotMarkMe(0, sIter0->second->Key, leftValue), new CPlotMarkMe(1, sIter1->second->Key, rightValue), &length);
 			if (lineParams != NULL)
 			{
 				a = lineParams[0];
@@ -6155,7 +6155,7 @@ void P047::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 				double leftTop = leftValue + parallel;
 				double rightTop = rightValue + parallel;
 				length = 0;
-				lineParams = CPlotBaseMe::GetLineParams(new PlotMark(0, sIter0->second->Key, leftTop), new PlotMark(1, sIter1->second->Key, rightTop), &length);
+				lineParams = CPlotBaseMe::GetLineParams(new CPlotMarkMe(0, sIter0->second->Key, leftTop), new CPlotMarkMe(1, sIter1->second->Key, rightTop), &length);
 				if (lineParams != NULL)
 				{
 					a = lineParams[0];
@@ -6169,7 +6169,7 @@ void P047::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 				double leftBottom = leftValue - parallel;
 				double rightBottom = rightValue - parallel;
 				length = 0;
-				lineParams = CPlotBaseMe::GetLineParams(new PlotMark(0, sIter0->second->Key, leftBottom), new PlotMark(1, sIter1->second->Key, rightBottom), &length);
+				lineParams = CPlotBaseMe::GetLineParams(new CPlotMarkMe(0, sIter0->second->Key, leftBottom), new CPlotMarkMe(1, sIter1->second->Key, rightBottom), &length);
 				if (lineParams != NULL)
 				{
 					a = lineParams[0];
@@ -6203,8 +6203,8 @@ ActionType P048::GetAction()
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		float x1 = CPlotBaseMe::PX(bIndex);
@@ -6278,7 +6278,7 @@ void P048::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -6300,8 +6300,8 @@ void P048::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -6330,15 +6330,15 @@ void P048::OnMoving()
 	}
 }
 
-void P048::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P048::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
 		float *lRParams = CPlotBaseMe::GetLRParams(pList);
 		if (lRParams != NULL)
 		{
-			map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-			map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+			map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+			map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 			int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 			int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 			float x1 = CPlotBaseMe::PX(bIndex);
@@ -6387,9 +6387,9 @@ ActionType P049::GetAction(const POINT& mp)
 	double nLow = candleRange[1];
 	if (candleRange != NULL)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		return CPlotBaseMe::SelectRect(mp, new PlotMark(0, sIter0->second->Key, nHigh), new PlotMark(1, sIter1->second->Key, nLow));
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		return CPlotBaseMe::SelectRect(mp, new CPlotMarkMe(0, sIter0->second->Key, nHigh), new CPlotMarkMe(1, sIter1->second->Key, nLow));
 	}
 	return ActionType_NO;
 }
@@ -6436,7 +6436,7 @@ void P049::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -6458,8 +6458,8 @@ void P049::OnMoving()
 	{
 		mouseIndex = chart->GetLastVisibleIndex();
 	}
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 	switch (CPlotBaseMe::m_action)
@@ -6488,12 +6488,12 @@ void P049::OnMoving()
 	}
 }
 
-void P049::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P049::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		int eIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key);
 		int length = 0;
@@ -6502,7 +6502,7 @@ void P049::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 		double nLow = candleRange[1];
 		if (candleRange != NULL)
 		{
-			RECT rectangle = CPlotBaseMe::GetRectangle(new PlotMark(0, sIter0->second->Key, nHigh), new PlotMark(1, sIter1->second->Key, nLow));
+			RECT rectangle = CPlotBaseMe::GetRectangle(new CPlotMarkMe(0, sIter0->second->Key, nHigh), new CPlotMarkMe(1, sIter1->second->Key, nLow));
 			int x1 = rectangle.left;
 			int y1 = rectangle.top;
 			int x2 = rectangle.right;
@@ -6571,9 +6571,9 @@ ActionType P050::GetAction()
 		{
 			return ActionType_AT3;
 		}
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-		map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		float y3 = CPlotBaseMe::PY(sIter2->second->Value);
@@ -6614,11 +6614,11 @@ ActionType P050::GetAction()
 	return action;
 }
 
-POINT* P050::GetPLPoints(map<int,PlotMark*> *pList, int *length)
+POINT* P050::GetPLPoints(map<int,CPlotMarkMe*> *pList, int *length)
 {
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
-	map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+	map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 	POINT point = {(int)CPlotBaseMe::PX(CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key)), (int)CPlotBaseMe::PY(sIter0->second->Value)};
 	POINT point2 = {(int)CPlotBaseMe::PX(CPlotBaseMe::m_dataSource->GetRowIndex(sIter1->second->Key)), (int)CPlotBaseMe::PY(sIter1->second->Value)};
 	POINT point3 = {(int)CPlotBaseMe::PX(CPlotBaseMe::m_dataSource->GetRowIndex(sIter2->second->Key)), (int)CPlotBaseMe::PY(sIter2->second->Value)};
@@ -6659,15 +6659,15 @@ bool P050::OnCreate(const POINT& mp)
 	double date = CPlotBaseMe::m_dataSource->GetXValue(currentIndex);
 	//CPlotBaseMe::m_marks.Clear();
 	CPlotBaseMe::ClearMarks(&m_marks);
-	CPlotBaseMe::m_marks.insert(make_pair(0, new PlotMark(0, date, y)));
+	CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, date, y)));
 	int si = currentIndex + 10;
 	CChartMe *chart = CPlotBaseMe::GetChart();
 	if (si > chart->GetLastVisibleIndex())
 	{
 		si = chart->GetLastVisibleIndex();
 	}
-	CPlotBaseMe::m_marks.insert(make_pair(1, new PlotMark(1, CPlotBaseMe::m_dataSource->GetXValue(si), y)));
-	CPlotBaseMe::m_marks.insert(make_pair(2, new PlotMark(2, date, y)));
+	CPlotBaseMe::m_marks.insert(make_pair(1, new CPlotMarkMe(1, CPlotBaseMe::m_dataSource->GetXValue(si), y)));
+	CPlotBaseMe::m_marks.insert(make_pair(2, new CPlotMarkMe(2, date, y)));
 	return true;
 }
 
@@ -6687,7 +6687,7 @@ void P050::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -6704,7 +6704,7 @@ void P050::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P050::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P050::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6743,8 +6743,8 @@ ActionType P051::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
@@ -6792,7 +6792,7 @@ void P051::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -6801,12 +6801,12 @@ void P051::OnMoveStart()
 	}
 }
 
-void P051::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P051::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-		map<int,PlotMark*>::iterator sIter1 = pList->find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
@@ -6825,10 +6825,10 @@ void P051::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void P052::GetLine3Params(map<int,PlotMark*> *pList, float *k, float *d, float *x4)
+void P052::GetLine3Params(map<int,CPlotMarkMe*> *pList, float *k, float *d, float *x4)
 {
-	map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-	map<int,PlotMark*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
+	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 	int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 	int pIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter2->second->Key);
 	float x1 = CPlotBaseMe::PX(bIndex);
@@ -6856,7 +6856,7 @@ void P052::GetLine3Params(map<int,PlotMark*> *pList, float *k, float *d, float *
 	}
 }
 
-void P052::PaintEx(CPaintMe *paint, map<int,PlotMark*> *pList,_int64 lineColor)
+void P052::PaintEx(CPaintMe *paint, map<int,CPlotMarkMe*> *pList,_int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6920,7 +6920,7 @@ void P052::OnMoveStart()
 	if (CPlotBaseMe::m_action != ActionType_NO)
 	{
 		CPlotBaseMe::SetCursor(CursorsA_Hand);
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 		sIterPlot = CPlotBaseMe::m_marks.find(1);
 		CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -6956,8 +6956,8 @@ ActionType P053::GetAction()
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		POINT mp = CPlotBaseMe::GetMouseOverPoint();
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		if ((mp.y >= (y1 - (CPlotBaseMe::m_lineWidth * 2.5))) && (mp.y <= (y1 + (CPlotBaseMe::m_lineWidth * 2.5))))
@@ -6998,7 +6998,7 @@ void P053::OnMoveStart()
 		{
 			CPlotBaseMe::SetCursor(CursorsA_SizeNS);
 		}
-		map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 		CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 	}
 }
@@ -7012,12 +7012,12 @@ void P053::OnMoving()
 	}
 }
 
-void P053::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P053::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
-		map<int,PlotMark*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
-		map<int,PlotMark*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
+		map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
+		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 		int bIndex = CPlotBaseMe::m_dataSource->GetRowIndex(sIter0->second->Key);
 		float x1 = CPlotBaseMe::PX(bIndex);
@@ -7041,11 +7041,11 @@ void P053::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-float* P054::GetGoldenRatioAimParams(map<int,PlotMark*> *pList, int *length)
+float* P054::GetGoldenRatioAimParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-	map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-	map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+	map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 	double baseValue = sIter0->second->Value;
 	if (sIter1->second->Value >= sIter2->second->Value)
 	{
@@ -7079,7 +7079,7 @@ void P054::OnMoveStart()
 	CPlotBaseMe::ClearMarks(&m_startMarks);
 	CPlotBaseMe::m_startPoint = CPlotBaseMe::GetMouseOverPoint();
 	CPlotBaseMe::SetCursor(CursorsA_Hand);
-	map<int,PlotMark*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
+	map<int,CPlotMarkMe*>::iterator sIterPlot = CPlotBaseMe::m_marks.find(0);
 	CPlotBaseMe::m_startMarks.insert(make_pair(0, sIterPlot->second));
 	sIterPlot = CPlotBaseMe::m_marks.find(1);
 	CPlotBaseMe::m_startMarks.insert(make_pair(1, sIterPlot->second));
@@ -7090,11 +7090,11 @@ void P054::OnMoveStart()
 	//CPlotBaseMe::m_startMarks[2] = CPlotBaseMe::m_marks[2];
 }
 
-void P054::Paint(CPaintMe *paint, map<int,PlotMark*> *pList, _int64 lineColor)
+void P054::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
-	map<int,PlotMark*>::iterator sIter0 = pList->find(0);
-	map<int,PlotMark*>::iterator sIter1 = pList->find(1);
-	map<int,PlotMark*>::iterator sIter2 = pList->find(2);
+	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
+	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
+	map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 	float y1 = CPlotBaseMe::PY(sIter0->second->Value);
 	float y2 = CPlotBaseMe::PY(sIter1->second->Value);
 	float y3 = CPlotBaseMe::PY(sIter2->second->Value);

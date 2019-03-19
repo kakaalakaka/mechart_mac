@@ -50,7 +50,7 @@ namespace MeLib
 		virtual _int64 GetSelectedColor();
 	};
     
-	class CandleShape:public CBaseShapeMe
+	class CCandleShapeMe:public CBaseShapeMe
 	{
 	protected:
 		int m_closeField;
@@ -69,7 +69,7 @@ namespace MeLib
 		_int64 m_tagColor;
 		_int64 m_upColor;
 	public:
-		CandleShape();
+		CCandleShapeMe();
 		int GetCloseField();
 		void SetCloseField(int closeField);
 		String GetCloseFieldText();
@@ -155,7 +155,7 @@ namespace MeLib
 		virtual void SetProperty(const String& name, const String& value);
 	};
     
-	class PolylineShape:public CBaseShapeMe
+	class CPolylineShapeMe:public CBaseShapeMe
 	{
 	protected:
 		_int64 m_color;
@@ -166,7 +166,7 @@ namespace MeLib
 		PolylineStyle m_style;
 		float m_width;
 	public:
-		PolylineShape();
+		CPolylineShapeMe();
 		_int64 GetColor();
 		void SetColor(_int64 color);
 		int GetColorField();
@@ -191,7 +191,7 @@ namespace MeLib
 		virtual void SetProperty(const String& name, const String& value);
 	};
     
-	class TextShape:public CBaseShapeMe
+	class CTextShapeMe:public CBaseShapeMe
 	{
 	protected:
 		int m_colorField;
@@ -201,8 +201,8 @@ namespace MeLib
 		int m_styleField;
 		String m_text;
 	public:
-		TextShape();
-		virtual ~TextShape();
+		CTextShapeMe();
+		virtual ~CTextShapeMe();
 		int GetColorField();
 		void SetColorField(int colorField);
 		int GetFieldName();

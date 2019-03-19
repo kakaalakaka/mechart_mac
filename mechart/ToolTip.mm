@@ -2,7 +2,7 @@
 #include "ToolTip.h"
 using namespace MeLib;
 
-ToolTipA::ToolTipA()
+ToolTipMe::ToolTipMe()
 {
 	m_timerID = GetNewTimerID();
 	m_autoPopDelay = 0;
@@ -20,57 +20,57 @@ ToolTipA::ToolTipA()
 	SetVisible(false);
 }
 
-ToolTipA::~ToolTipA()
+ToolTipMe::~ToolTipMe()
 {
 	StopTimer(m_timerID);
 }
 
-int ToolTipA::GetAutoPopDelay()
+int ToolTipMe::GetAutoPopDelay()
 {
 	return m_autoPopDelay;
 }
 
-void ToolTipA::SetAutoPopDelay( int autoPopDelay )
+void ToolTipMe::SetAutoPopDelay( int autoPopDelay )
 {
 	m_autoPopDelay = autoPopDelay;
 }
 
-int ToolTipA::GetInitialDelay()
+int ToolTipMe::GetInitialDelay()
 {
 	return m_initialDelay;
 }
 
-void ToolTipA::SetInitialDelay( int initialDelay )
+void ToolTipMe::SetInitialDelay( int initialDelay )
 {
 	m_initialDelay = initialDelay;
 }
 
-bool ToolTipA::ShowAlways()
+bool ToolTipMe::ShowAlways()
 {
 	return m_showAlways;
 }
 
-void ToolTipA::SetShowAlways( bool showAlways )
+void ToolTipMe::SetShowAlways( bool showAlways )
 {
 	m_showAlways = showAlways;
 }
 
-bool ToolTipA::UseAnimation()
+bool ToolTipMe::UseAnimation()
 {
 	return m_useAnimation;
 }
 
-void ToolTipA::SetUseAnimation( bool useAnimation )
+void ToolTipMe::SetUseAnimation( bool useAnimation )
 {
 	m_useAnimation = useAnimation;
 }
 
-String ToolTipA::GetControlType()
+String ToolTipMe::GetControlType()
 {
 	return L"ToolTip";
 }
 
-void ToolTipA::GetProperty( const String& name, String *value, String *type )
+void ToolTipMe::GetProperty( const String& name, String *value, String *type )
 {
 	if (name == L"autopopupdelay")
 	{
@@ -98,7 +98,7 @@ void ToolTipA::GetProperty( const String& name, String *value, String *type )
 	}
 }
 
-vector<String> ToolTipA::GetPropertyNames()
+vector<String> ToolTipMe::GetPropertyNames()
 {
 	vector<String> propertyNames = CLabelMe::GetPropertyNames();
 	propertyNames.push_back(L"AutoPopupDelay");
@@ -108,19 +108,19 @@ vector<String> ToolTipA::GetPropertyNames()
 	return propertyNames;
 }
 
-void ToolTipA::Hide()
+void ToolTipMe::Hide()
 {
 	SetVisible(false);
 }
 
-void ToolTipA::OnLoad()
+void ToolTipMe::OnLoad()
 {
 	CControlMe::OnLoad();
 	m_lastMousePoint = GetMousePoint();
 	StartTimer(m_timerID, 10);
 }
 
-void ToolTipA::OnTimer( int timerID )
+void ToolTipMe::OnTimer( int timerID )
 {
 	CControlMe::OnTimer(timerID);
 	if (m_timerID == timerID)
@@ -150,7 +150,7 @@ void ToolTipA::OnTimer( int timerID )
 	}
 }
 
-void ToolTipA::OnVisibleChanged()
+void ToolTipMe::OnVisibleChanged()
 {
 	CControlMe::OnVisibleChanged();
 	if (m_native)
@@ -172,7 +172,7 @@ void ToolTipA::OnVisibleChanged()
 	}
 }
 
-void ToolTipA::Show()
+void ToolTipMe::Show()
 {
 	m_remainAutoPopDelay = 0;
 	m_remainInitialDelay = m_initialDelay;
@@ -180,7 +180,7 @@ void ToolTipA::Show()
 	GetNative()->Invalidate();
 }
 
-void ToolTipA::SetProperty( const String& name, const String& value )
+void ToolTipMe::SetProperty( const String& name, const String& value )
 {
 	if (name == L"autopopupdelay")
 	{

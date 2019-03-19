@@ -635,25 +635,25 @@ namespace MeLib
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-    void GridControlCell::ControlMouseDown(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke)
+    void CGridControlCellMe::ControlMouseDown(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke)
     {
-        GridControlCell* gridControlCell = (GridControlCell*)pInvoke;
+        CGridControlCellMe* gridControlCell = (CGridControlCellMe*)pInvoke;
         gridControlCell->OnControlMouseDown(mp, button, clicks, delta);
     }
 
-    void GridControlCell::ControlMouseMove(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke)
+    void CGridControlCellMe::ControlMouseMove(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke)
     {
-        GridControlCell* gridControlCell = (GridControlCell*)pInvoke;
+        CGridControlCellMe* gridControlCell = (CGridControlCellMe*)pInvoke;
         gridControlCell->OnControlMouseMove( mp, button, clicks, delta);
     }
 
-    void GridControlCell::ControlMouseUp(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke)
+    void CGridControlCellMe::ControlMouseUp(void *sender, const POINT& mp, MouseButtonsA button, int clicks, int delta, void *pInvoke)
     {
-        GridControlCell* gridControlCell = (GridControlCell*)pInvoke;
+        CGridControlCellMe* gridControlCell = (CGridControlCellMe*)pInvoke;
         gridControlCell->OnControlMouseUp( mp, button, clicks, delta);
     }
 
-	GridControlCell::GridControlCell()
+	CGridControlCellMe::CGridControlCellMe()
 	{
 		m_control = 0;
         m_mouseDownEvent = &ControlMouseDown;
@@ -661,7 +661,7 @@ namespace MeLib
         m_mouseUpEvent = &ControlMouseUp;
 	}
 	
-	GridControlCell::~GridControlCell()
+	CGridControlCellMe::~CGridControlCellMe()
 	{
 		if(m_control)
 		{
@@ -673,17 +673,17 @@ namespace MeLib
 		m_mouseUpEvent = 0;
 	}
 	
-	CControlMe* GridControlCell::GetControl()
+	CControlMe* CGridControlCellMe::GetControl()
 	{
 		return m_control;
 	}
 	
-	void GridControlCell::SetControl(CControlMe *control)
+	void CGridControlCellMe::SetControl(CControlMe *control)
 	{
 		m_control = control;
 	}
 	
-	String GridControlCell::GetString()
+	String CGridControlCellMe::GetString()
 	{
 		if (m_control)
 		{
@@ -692,12 +692,12 @@ namespace MeLib
 		return L"";
 	}
 	
-	String GridControlCell::GetPaintText()
+	String CGridControlCellMe::GetPaintText()
 	{
 		return L"";
 	}
 	
-	void GridControlCell::OnAdd()
+	void CGridControlCellMe::OnAdd()
 	{
 		 CGridMe* grid = GetGrid();
 		if (m_control && grid)
@@ -709,7 +709,7 @@ namespace MeLib
 		}
 	}
 	
-	void GridControlCell::OnControlMouseDown(const POINT& mp, MouseButtonsA button, int clicks, int delta)
+	void CGridControlCellMe::OnControlMouseDown(const POINT& mp, MouseButtonsA button, int clicks, int delta)
 	{
 		CGridMe* grid = GetGrid();
 		if (m_control && grid)
@@ -718,7 +718,7 @@ namespace MeLib
 		}
 	}
 	
-	void GridControlCell::OnControlMouseMove(const POINT& mp, MouseButtonsA button, int clicks, int delta)
+	void CGridControlCellMe::OnControlMouseMove(const POINT& mp, MouseButtonsA button, int clicks, int delta)
 	{
 		CGridMe* grid = GetGrid();
 		if (m_control && grid)
@@ -727,7 +727,7 @@ namespace MeLib
 		}
 	}
 	
-	void GridControlCell::OnControlMouseUp(const POINT& mp, MouseButtonsA button, int clicks, int delta)
+	void CGridControlCellMe::OnControlMouseUp(const POINT& mp, MouseButtonsA button, int clicks, int delta)
 	{
 		CGridMe* grid = GetGrid();
 		if (m_control && grid)
@@ -736,13 +736,13 @@ namespace MeLib
 		}
 	}
 	
-	void GridControlCell::OnPaint(CPaintMe *paint, const RECT& rect, const RECT& clipRect, bool isAlternate)
+	void CGridControlCellMe::OnPaint(CPaintMe *paint, const RECT& rect, const RECT& clipRect, bool isAlternate)
 	{
 		CGridCellMe::OnPaint(paint, rect, clipRect, isAlternate);
         OnPaintControl(paint, rect, clipRect);
 	}
 
-	void GridControlCell::OnPaintControl(CPaintMe *paint, const RECT& rect, const RECT& clipRect)
+	void CGridControlCellMe::OnPaintControl(CPaintMe *paint, const RECT& rect, const RECT& clipRect)
 	{
 		if (m_control)
 		{
@@ -761,7 +761,7 @@ namespace MeLib
 		}
 	}
 	
-	void GridControlCell::OnRemove()
+	void CGridControlCellMe::OnRemove()
 	{
 		CGridMe* grid = GetGrid();
 		if (m_control && grid)
@@ -774,7 +774,7 @@ namespace MeLib
 		}
 	}
 	
-	void GridControlCell::SetString(const String& value)
+	void CGridControlCellMe::SetString(const String& value)
 	{
 		if (m_control)
 		{

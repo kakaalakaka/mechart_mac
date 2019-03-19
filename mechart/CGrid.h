@@ -26,24 +26,24 @@ namespace MeLib
     
 	typedef void (*GridCellMouseEvent)(void*, CGridCellMe*, const POINT&, MouseButtonsA, int, int, void*);
     
-	class GridRowCompare
+	class CGridRowCompareMe
 	{
 	public:
 		int m_columnIndex;
 		int m_type;
 	public:
-		GridRowCompare();
-		virtual ~GridRowCompare();
+		CGridRowCompareMe();
+		virtual ~CGridRowCompareMe();
 		bool operator()(CGridRowMe *x, CGridRowMe *y);
 	};
 
 	class CGridMe;
 
-	class GridSort
+	class CGridSortMe
 	{
 	public:
-		GridSort();
-		virtual ~GridSort();
+		CGridSortMe();
+		virtual ~CGridSortMe();
 	public:
 		virtual void SortColumn(CGridMe *grid, CGridColumnMe *column, GridColumnSortMode sortMode);
 	};
@@ -73,7 +73,7 @@ namespace MeLib
         bool m_multiSelect;
         CGridRowStyleMe *m_rowStyle;
         GridSelectionMode m_selectionMode;
-        GridSort *m_sort;
+        CGridSortMe *m_sort;
         bool m_useAnimation;
         int m_verticalOffset;
         void CallCellEvents(int eventID, CGridCellMe *cell);
@@ -127,8 +127,8 @@ namespace MeLib
         virtual void SetSelectedRows(vector<CGridRowMe*> selectedRows);
         virtual GridSelectionMode GetSelectionMode();
         virtual void SetSelectionMode(GridSelectionMode selectionMode);
-        virtual GridSort* GetSort();
-        virtual void SetSort(GridSort *sort);
+        virtual CGridSortMe* GetSort();
+        virtual void SetSort(CGridSortMe *sort);
         virtual bool UseAnimation();
         virtual void SetUseAnimation(bool useAnimation);
         virtual int GetVerticalOffset();

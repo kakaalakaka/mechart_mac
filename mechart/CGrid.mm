@@ -4,17 +4,17 @@
 
 namespace MeLib
 {
-	GridRowCompare::GridRowCompare()
+	CGridRowCompareMe::CGridRowCompareMe()
 	{
 		m_columnIndex = 0;
 		m_type = 0;
 	}
 
-	GridRowCompare::~GridRowCompare()
+	CGridRowCompareMe::~CGridRowCompareMe()
 	{
 	}
 
-	bool GridRowCompare::operator()(CGridRowMe *x, CGridRowMe *y)
+	bool CGridRowCompareMe::operator()(CGridRowMe *x, CGridRowMe *y)
 	{
 		CGridCellMe *cellLeft = x->GetCell(m_columnIndex);
         CGridCellMe *cellRight = y->GetCell(m_columnIndex);
@@ -30,15 +30,15 @@ namespace MeLib
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	GridSort::GridSort()
+	CGridSortMe::CGridSortMe()
 	{
 	}
 
-	GridSort::~GridSort()
+	CGridSortMe::~CGridSortMe()
 	{
 	}
 
-	void GridSort::SortColumn(CGridMe *grid, CGridColumnMe *column, GridColumnSortMode sortMode)
+	void CGridSortMe::SortColumn(CGridMe *grid, CGridColumnMe *column, GridColumnSortMode sortMode)
 	{
 		if(column->AllowSort())
 		{
@@ -58,7 +58,7 @@ namespace MeLib
 			}
 			if (columnIndex != -1)
 			{
-				GridRowCompare compare;
+				CGridRowCompareMe compare;
 				compare.m_columnIndex = columnIndex;
 				if (sortMode == GridColumnSortMode_Desc)
 				{
@@ -591,7 +591,7 @@ namespace MeLib
 		m_multiSelect = false;
 		m_rowStyle = new CGridRowStyleMe;
 		m_selectionMode = GridSelectionMode_SelectFullRow;
-		m_sort = new GridSort;
+		m_sort = new CGridSortMe;
 		m_timerID = GetNewTimerID();
 		m_useAnimation = false;
 		m_verticalOffset = 0;
@@ -844,12 +844,12 @@ namespace MeLib
 		m_selectionMode = selectionMode;
 	}
 
-	GridSort* CGridMe::GetSort()
+	CGridSortMe* CGridMe::GetSort()
 	{
 		return m_sort;
 	}
 
-	void CGridMe::SetSort(GridSort *sort)
+	void CGridMe::SetSort(CGridSortMe *sort)
 	{
 		if(m_sort)
 		{
@@ -2383,7 +2383,7 @@ namespace MeLib
 			}
 			if (columnIndex != -1)
 			{
-				GridRowCompare compare;
+				CGridRowCompareMe compare;
 				compare.m_columnIndex = columnIndex;
 				if (sortMode == GridColumnSortMode_Desc)
 				{

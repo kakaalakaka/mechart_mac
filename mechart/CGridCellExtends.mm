@@ -356,7 +356,7 @@ namespace MeLib
 			comboBox->RegisterEvent((void *)m_mouseMoveEvent, EVENTID::MOUSEMOVE, this);
 			comboBox->RegisterEvent((void *)m_mouseUpEvent,  EVENTID::MOUSEUP, this);
 		}
-		GridControlCell::OnAdd();
+		CGridControlCellMe::OnAdd();
 	}
 
 	void CGridComboBoxCellMe::OnRemove()
@@ -368,7 +368,7 @@ namespace MeLib
 			comboBox->UnRegisterEvent((void *)m_mouseMoveEvent, EVENTID::MOUSEMOVE);
 			comboBox->UnRegisterEvent((void *)m_mouseUpEvent,  EVENTID::MOUSEUP);
 		}
-		GridControlCell::OnRemove();
+		CGridControlCellMe::OnRemove();
 	}
 
 	void CGridComboBoxCellMe::SetBool(bool value)
@@ -1168,7 +1168,7 @@ namespace MeLib
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	GridTextBoxCell::GridTextBoxCell()
+	CGridTextBoxCellMe::CGridTextBoxCellMe()
 	{
         CTextBoxMe* textBoxA = new CTextBoxMe();
         textBoxA->SetBorderColor(COLOR_EMPTY);
@@ -1176,12 +1176,12 @@ namespace MeLib
         SetControl(textBoxA);		
 	}
 	
-	GridTextBoxCell:: ~GridTextBoxCell()
+	CGridTextBoxCellMe:: ~CGridTextBoxCellMe()
 	{
 		
 	}
 	
-	CTextBoxMe* GridTextBoxCell::GetTextBox()
+	CTextBoxMe* CGridTextBoxCellMe::GetTextBox()
 	{
 		CControlMe *control = GetControl();
 		if (control)
