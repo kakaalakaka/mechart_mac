@@ -4,12 +4,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P001::P001()
+PlotAndrewsPitchFork::PlotAndrewsPitchFork()
 {
 	SetPlotType(L"ANDREWSPITCHFORK");
 }
 
-ActionType P001::GetAction()
+ActionType PlotAndrewsPitchFork::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	int size = (int)CPlotBaseMe::m_marks.size();
@@ -106,7 +106,7 @@ ActionType P001::GetAction()
 	return nO;
 }
 
-bool P001::OnCreate(const POINT& mp)
+bool PlotAndrewsPitchFork::OnCreate(const POINT& mp)
 {
 	bool flag = CPlotBaseMe::Create4CandlePoints(mp);
 	if (flag)
@@ -122,7 +122,7 @@ bool P001::OnCreate(const POINT& mp)
 	return flag;
 }
 
-void P001::OnMoveStart()
+void PlotAndrewsPitchFork::OnMoveStart()
 {
 	m_action = CPlotBaseMe::GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -156,7 +156,7 @@ void P001::OnMoveStart()
 	}
 }
 
-void P001::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotAndrewsPitchFork::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
@@ -222,12 +222,12 @@ void P001::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P002::P002()
+PlotAngleLine::PlotAngleLine()
 {
 	SetPlotType(L"ANGLELINE");
 }
 
-ActionType P002::GetAction()
+ActionType PlotAngleLine::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	int size = (int)CPlotBaseMe::m_marks.size();
@@ -238,7 +238,7 @@ ActionType P002::GetAction()
 		map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
 		map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
 		vector<CPlotMarkMe**> list;
-		CPlotMarkMe** arry1 = new CPlotMarkMe*[2];
+		CPlotMarkMe** arry1 = new CPlotMarkMe*[2]; 
 		arry1[0] = sIter0->second;
 		arry1[1] = sIter1->second;//{ sIter0->second, sIter1->second };
 		CPlotMarkMe** arry2 = new CPlotMarkMe*[2];
@@ -310,12 +310,12 @@ ActionType P002::GetAction()
 	return nO;
 }
 
-bool P002::OnCreate(const POINT& mp)
+bool PlotAngleLine::OnCreate(const POINT& mp)
 {
 	return Create3Points(mp);
 }
 
-void P002::OnMoveStart()
+void PlotAngleLine::OnMoveStart()
 {
 	m_action = CPlotBaseMe::GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -342,7 +342,7 @@ void P002::OnMoveStart()
 	}
 }
 
-void P002::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotAngleLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
@@ -354,7 +354,7 @@ void P002::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 		map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
 		map<int,CPlotMarkMe*>::iterator sIter2 = pList->find(2);
 		vector<CPlotMarkMe**> marks;
-		CPlotMarkMe** arry1 = new CPlotMarkMe*[2];
+		CPlotMarkMe** arry1 = new CPlotMarkMe*[2]; 
 		arry1[0] = sIter0->second;
 		arry1[1] = sIter1->second;//{ sIter0->second, sIter1->second };
 		CPlotMarkMe** arry2 = new CPlotMarkMe*[2];
@@ -414,12 +414,12 @@ void P002::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-P003::P003()
+PlotCircumCircle::PlotCircumCircle()
 {
 	SetPlotType(L"CIRCUMCIRCLE");
 }
 
-ActionType P003::GetAction()
+ActionType PlotCircumCircle::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	int size = (int)CPlotBaseMe::m_marks.size();
@@ -466,12 +466,12 @@ ActionType P003::GetAction()
 	return ActionType_MOVE;
 }
 
-bool P003::OnCreate(const POINT& mp)
+bool PlotCircumCircle::OnCreate(const POINT& mp)
 {
 	return Create3Points(mp);
 }
 
-void P003::OnMoveStart()
+void PlotCircumCircle::OnMoveStart()
 {
 	m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -498,7 +498,7 @@ void P003::OnMoveStart()
 	}
 }
 
-void P003::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotCircumCircle::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
@@ -533,12 +533,12 @@ void P003::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P004::P004()
+PlotArrowSegment::PlotArrowSegment()
 {
 	SetPlotType(L"ARROWSEGMENT");
 }
 
-ActionType P004::GetAction()
+ActionType PlotArrowSegment::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	int size = (int)CPlotBaseMe::m_marks.size();
@@ -584,12 +584,12 @@ ActionType P004::GetAction()
 	return nO;
 }
 
-bool P004::OnCreate(const POINT& mp)
+bool PlotArrowSegment::OnCreate(const POINT& mp)
 {
 	return Create2PointsB(mp);
 }
 
-void P004::OnMoveStart()
+void PlotArrowSegment::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -613,7 +613,7 @@ void P004::OnMoveStart()
 	}
 }
 
-void P004::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotArrowSegment::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
@@ -652,19 +652,19 @@ void P004::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-RECT P005::GetDownArrowRect(float x, float y, float width)
+RECT PlotDownArrow::GetDownArrowRect(float x, float y, float width)
 {
 	RECT rect = {(LONG)x, (LONG)y, (LONG)(x + width), (LONG)(y + width)};
 	return rect;
 }
 
 
-P005::P005()
+PlotDownArrow::PlotDownArrow()
 {
 	SetPlotType(L"DOWNARROW");
 }
 
-ActionType P005::GetAction()
+ActionType PlotDownArrow::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	int size = (int)CPlotBaseMe::m_marks.size();
@@ -687,12 +687,12 @@ ActionType P005::GetAction()
 	return nO;
 }
 
-bool P005::OnCreate(const POINT& mp)
+bool PlotDownArrow::OnCreate(const POINT& mp)
 {
 	return CreatePoint(mp);
 }
 
-void P005::OnMoveStart()
+void PlotDownArrow::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -705,7 +705,7 @@ void P005::OnMoveStart()
 	}
 }
 
-void P005::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotDownArrow::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	int size = (int)pList->size();
 	if (size > 0)
@@ -739,7 +739,7 @@ void P005::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float* P006::GetDropLineParams(map<int, CPlotMarkMe*> *pList)
+float* PlotDropLine::GetDropLineParams(map<int, CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() == 0)
 	{
@@ -758,12 +758,12 @@ float* P006::GetDropLineParams(map<int, CPlotMarkMe*> *pList)
 }
 
 
-P006::P006()
+PlotDropLine::PlotDropLine()
 {
 	SetPlotType(L"DROPLINE");
 }
 
-ActionType P006::GetAction()
+ActionType PlotDropLine::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -779,12 +779,12 @@ ActionType P006::GetAction()
 	return nO;
 }
 
-bool P006::OnCreate(const POINT& mp)
+bool PlotDropLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::CreatePoint(mp);
 }
 
-void P006::OnMoveStart()
+void PlotDropLine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -798,7 +798,7 @@ void P006::OnMoveStart()
 	}
 }
 
-void P006::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotDropLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -815,12 +815,12 @@ void P006::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P009::P009()
+PlotEllipse::PlotEllipse()
 {
 	SetPlotType(L"ELLIPSE");
 }
 
-ActionType P009::GetAction()
+ActionType PlotEllipse::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -883,12 +883,12 @@ ActionType P009::GetAction()
 	return nO;
 }
 
-bool P009::OnCreate(const POINT& mp)
+bool PlotEllipse::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P009::OnMoveStart()
+void PlotEllipse::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -916,7 +916,7 @@ void P009::OnMoveStart()
 	}
 }
 
-void P009::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotEllipse::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -969,7 +969,7 @@ void P009::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P010::FibonacciEllipseParam(map<int, CPlotMarkMe*> *pList, int *length)
+float* PlotFiboEllipse::FibonacciEllipseParam(map<int, CPlotMarkMe*> *pList, int *length)
 {
 	if ((int)pList->size() == 0)
 	{
@@ -1004,12 +1004,12 @@ float* P010::FibonacciEllipseParam(map<int, CPlotMarkMe*> *pList, int *length)
 }
 
 
-P010::P010()
+PlotFiboEllipse::PlotFiboEllipse()
 {
 	SetPlotType(L"FIBOELLIPSE");
 }
 
-ActionType P010::GetAction()
+ActionType PlotFiboEllipse::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -1047,12 +1047,12 @@ ActionType P010::GetAction()
 	return nO;
 }
 
-bool P010::OnCreate(const POINT& mp)
+bool PlotFiboEllipse::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P010::OnMoveStart()
+void PlotFiboEllipse::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -1077,7 +1077,7 @@ void P010::OnMoveStart()
 	}
 }
 
-void P010::OnPaintGhost(CPaintMe *paint)
+void PlotFiboEllipse::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -1085,7 +1085,7 @@ void P010::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P010::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotFiboEllipse::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() > 0)
 	{
@@ -1129,12 +1129,12 @@ void P010::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P011::P011()
+PlotFibofanLine::PlotFibofanLine()
 {
 	SetPlotType(L"FIBOFANLINE");
 }
 
-ActionType P011::GetAction()
+ActionType PlotFibofanLine::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() == 0)
@@ -1178,12 +1178,12 @@ ActionType P011::GetAction()
 	return ActionType_MOVE;
 }
 
-bool P011::OnCreate(const POINT& mp)
+bool PlotFibofanLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P011::OnMoveStart()
+void PlotFibofanLine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -1207,7 +1207,7 @@ void P011::OnMoveStart()
 	}
 }
 
-void P011::OnPaintGhost(CPaintMe *paint)
+void PlotFibofanLine::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -1215,7 +1215,7 @@ void P011::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P011::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotFibofanLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() > 0)
 	{
@@ -1274,7 +1274,7 @@ void P011::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-vector<int> P012::GetFibonacciTimeZonesParam(map<int,CPlotMarkMe*> *pList)
+vector<int> PlotFiboTimeZone::GetFibonacciTimeZonesParam(map<int,CPlotMarkMe*> *pList)
 {
 	vector<int> fValueList;
 	if ((int)pList->size() == 0)
@@ -1298,12 +1298,12 @@ vector<int> P012::GetFibonacciTimeZonesParam(map<int,CPlotMarkMe*> *pList)
 }
 
 
-P012::P012()
+PlotFiboTimeZone::PlotFiboTimeZone()
 {
 	SetPlotType(L"FIBOTIMEZONE");
 }
 
-ActionType P012::GetAction()
+ActionType PlotFiboTimeZone::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -1328,12 +1328,12 @@ ActionType P012::GetAction()
 	return nO;
 }
 
-bool P012::OnCreate(const POINT& mp)
+bool PlotFiboTimeZone::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::CreatePoint(mp);
 }
 
-void P012::OnMoveStart()
+void PlotFiboTimeZone::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -1347,7 +1347,7 @@ void P012::OnMoveStart()
 	}
 }
 
-void P012::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotFiboTimeZone::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -1373,12 +1373,12 @@ void P012::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P014::P014()
+PlotGannbox::PlotGannbox()
 {
 	SetPlotType(L"GANNBOX");
 }
 
-ActionType P014::GetAction()
+ActionType PlotGannbox::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() == 0)
@@ -1388,7 +1388,7 @@ ActionType P014::GetAction()
 	return GetClickStatus();
 }
 
-ActionType P014::GetClickStatus()
+ActionType PlotGannbox::GetClickStatus()
 {
 	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
@@ -1475,7 +1475,7 @@ ActionType P014::GetClickStatus()
 	return ActionType_NO;
 }
 
-POINT* P014::GetGannBoxPoints(float x1, float y1, float x2, float y2, int *length)
+POINT* PlotGannbox::GetGannBoxPoints(float x1, float y1, float x2, float y2, int *length)
 {
 	POINT firstP = {(int)x2, (int)(y2 - (float)((y2 - y1) * 0.875))};
 	POINT secondP = {(int)x2, (int)(y2 - (float)((y2 - y1) * 0.75))};
@@ -1499,12 +1499,12 @@ POINT* P014::GetGannBoxPoints(float x1, float y1, float x2, float y2, int *lengt
 	//return new POINT[] { firstP, secondP, thirdP, forthP, fifthP, sixthP, seventhP, eighthP };
 }
 
-bool P014::OnCreate(const POINT& mp)
+bool PlotGannbox::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P014::OnMoveStart()
+void PlotGannbox::OnMoveStart()
 {
 
 	CPlotBaseMe::m_moveTimes++;
@@ -1569,7 +1569,7 @@ void P014::OnMoveStart()
 	}
 }
 
-void P014::OnMoving()
+void PlotGannbox::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
 	switch (CPlotBaseMe::m_action)
@@ -1586,7 +1586,7 @@ void P014::OnMoving()
 	}
 }
 
-void P014::OnPaintGhost(CPaintMe *paint)
+void PlotGannbox::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -1594,7 +1594,7 @@ void P014::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P014::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotGannbox::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -1680,12 +1680,12 @@ void P014::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P016::P016()
+PlotGannLine::PlotGannLine()
 {
 	SetPlotType(L"GANNLINE");
 }
 
-ActionType P016::GetAction()
+ActionType PlotGannLine::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -1756,12 +1756,12 @@ ActionType P016::GetAction()
 	return nO;
 }
 
-bool P016::OnCreate(const POINT& mp)
+bool PlotGannLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P016::OnMoveStart()
+void PlotGannLine::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -1790,7 +1790,7 @@ void P016::OnMoveStart()
 	}
 }
 
-void P016::OnPaintGhost(CPaintMe *paint)
+void PlotGannLine::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -1798,7 +1798,7 @@ void P016::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P016::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotGannLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -1874,12 +1874,12 @@ void P016::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P017::P017()
+PlotGoldenRatio::PlotGoldenRatio()
 {
 	SetPlotType(L"GOLDENRATIO");
 }
 
-ActionType P017::GetAction()
+ActionType PlotGoldenRatio::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -1916,12 +1916,12 @@ ActionType P017::GetAction()
 	return nO;
 }
 
-bool P017::OnCreate(const POINT& mp)
+bool PlotGoldenRatio::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P017::OnMoveStart()
+void PlotGoldenRatio::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -1944,7 +1944,7 @@ void P017::OnMoveStart()
 	}
 }
 
-void P017::OnMoving()
+void PlotGoldenRatio::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
 	switch (CPlotBaseMe::m_action)
@@ -1971,7 +1971,7 @@ void P017::OnMoving()
 	}
 }
 
-void P017::OnPaintGhost(CPaintMe *paint)
+void PlotGoldenRatio::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -1979,7 +1979,7 @@ void P017::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P017::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotGoldenRatio::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -2009,12 +2009,12 @@ void P017::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P018::P018()
+PlotHline::PlotHline()
 {
 	SetPlotType(L"HLINE");
 }
 
-ActionType P018::GetAction()
+ActionType PlotHline::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -2030,7 +2030,7 @@ ActionType P018::GetAction()
 	return nO;
 }
 
-bool P018::OnCreate(const POINT& mp)
+bool PlotHline::OnCreate(const POINT& mp)
 {
 	if (CPlotBaseMe::m_dataSource->RowsCount() > 0)
 	{
@@ -2042,7 +2042,7 @@ bool P018::OnCreate(const POINT& mp)
 	return false;
 }
 
-void P018::OnMoveStart()
+void PlotHline::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -2054,13 +2054,13 @@ void P018::OnMoveStart()
 	}
 }
 
-void P018::OnMoving()
+void PlotHline::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
 	CPlotBaseMe::m_marks.insert(make_pair(0, new CPlotMarkMe(0, 0.0, CPlotBaseMe::GetNumberValue(movingPoint))));
 }
 
-void P018::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotHline::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -2072,7 +2072,7 @@ void P018::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P019::LevelGradingParams(double value1, double value2, int *length)
+float* PlotLevelGrading::LevelGradingParams(double value1, double value2, int *length)
 {
 	float y1 = CPlotBaseMe::PY(value1);
 	float y2 = CPlotBaseMe::PY(value2);
@@ -2098,12 +2098,12 @@ float* P019::LevelGradingParams(double value1, double value2, int *length)
 }
 
 
-P019::P019()
+PlotLevelGrading::PlotLevelGrading()
 {
 	SetPlotType(L"LEVELGRADING");
 }
 
-ActionType P019::GetAction()
+ActionType PlotLevelGrading::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() > 0)
@@ -2140,12 +2140,12 @@ ActionType P019::GetAction()
 	return nO;
 }
 
-bool P019::OnCreate(const POINT& mp)
+bool PlotLevelGrading::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P019::OnMoveStart()
+void PlotLevelGrading::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -2168,7 +2168,7 @@ void P019::OnMoveStart()
 	}
 }
 
-void P019::OnMoving()
+void PlotLevelGrading::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
 	switch (CPlotBaseMe::m_action)
@@ -2195,7 +2195,7 @@ void P019::OnMoving()
 	}
 }
 
-void P019::OnPaintGhost(CPaintMe *paint)
+void PlotLevelGrading::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -2203,7 +2203,7 @@ void P019::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P019::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotLevelGrading::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -2250,12 +2250,12 @@ void P019::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P020::P020()
+PlotLine::PlotLine()
 {
 	SetPlotType(L"LINE");
 }
 
-ActionType P020::GetAction()
+ActionType PlotLine::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -2285,12 +2285,12 @@ ActionType P020::GetAction()
 	return nO;
 }
 
-bool P020::OnCreate(const POINT& mp)
+bool PlotLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsA(mp);
 }
 
-void P020::OnMoveStart()
+void PlotLine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -2312,7 +2312,7 @@ void P020::OnMoveStart()
 	}
 }
 
-void P020::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -2352,12 +2352,12 @@ void P020::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P021::P021()
+PlotLrBand::PlotLrBand()
 {
 	SetPlotType(L"LRBAND");
 }
 
-ActionType P021::GetAction()
+ActionType PlotLrBand::GetAction()
 {
 
 	ActionType nO = ActionType_NO;
@@ -2420,12 +2420,12 @@ ActionType P021::GetAction()
 	return nO;
 }
 
-bool P021::OnCreate(const POINT& mp)
+bool PlotLrBand::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P021::OnMoveStart()
+void PlotLrBand::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -2447,7 +2447,7 @@ void P021::OnMoveStart()
 	}
 }
 
-void P021::OnMoving()
+void PlotLrBand::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -2490,7 +2490,7 @@ void P021::OnMoving()
 	}
 }
 
-void P021::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotLrBand::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -2532,12 +2532,12 @@ void P021::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P022::P022()
+PlotLrChannel::PlotLrChannel()
 {
 	SetPlotType(L"LRCHANNEL");
 }
 
-ActionType P022::GetAction()
+ActionType PlotLrChannel::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -2600,12 +2600,12 @@ ActionType P022::GetAction()
 	return nO;
 }
 
-bool P022::OnCreate(const POINT& mp)
+bool PlotLrChannel::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P022::OnMoveStart()
+void PlotLrChannel::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -2627,7 +2627,7 @@ void P022::OnMoveStart()
 	}
 }
 
-void P022::OnMoving()
+void PlotLrChannel::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -2671,7 +2671,7 @@ void P022::OnMoving()
 
 }
 
-void P022::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotLrChannel::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -2724,12 +2724,12 @@ void P022::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P023::P023()
+PlotLrLine::PlotLrLine()
 {
 	SetPlotType(L"LRLINE");
 }
 
-ActionType P023::GetAction()
+ActionType PlotLrLine::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -2775,12 +2775,12 @@ ActionType P023::GetAction()
 	return nO;
 }
 
-bool P023::OnCreate(const POINT& mp)
+bool PlotLrLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P023::OnMoveStart()
+void PlotLrLine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -2802,7 +2802,7 @@ void P023::OnMoveStart()
 	}
 }
 
-void P023::OnMoving()
+void PlotLrLine::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -2845,7 +2845,7 @@ void P023::OnMoving()
 	}
 }
 
-void P023::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotLrLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -2876,7 +2876,7 @@ void P023::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void P024::NullPoint(float x1, float y1, float x2, float y2, float *nullX, float *nullY)
+void PlotNullPoint::NullPoint(float x1, float y1, float x2, float y2, float *nullX, float *nullY)
 {
 	float k1 = 0;
 	float k2 = 0;
@@ -2900,7 +2900,7 @@ void P024::NullPoint(float x1, float y1, float x2, float y2, float *nullX, float
 	*nullY = (*nullX * k1) + b1;
 }
 
-double* P024::GetNullPointParams(map<int,CPlotMarkMe*> *pList)
+double* PlotNullPoint::GetNullPointParams(map<int,CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() == 0
 		|| (int)CPlotBaseMe::m_sourceFields.size() == 0
@@ -2935,12 +2935,12 @@ double* P024::GetNullPointParams(map<int,CPlotMarkMe*> *pList)
 }
 
 
-P024::P024()
+PlotNullPoint::PlotNullPoint()
 {
 	SetPlotType(L"NULLPOINT");
 }
 
-ActionType P024::GetAction()
+ActionType PlotNullPoint::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -2995,12 +2995,12 @@ ActionType P024::GetAction()
 	return nO;
 }
 
-bool P024::OnCreate(const POINT& mp)
+bool PlotNullPoint::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P024::OnMoveStart()
+void PlotNullPoint::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -3024,7 +3024,7 @@ void P024::OnMoveStart()
 	}
 }
 
-void P024::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotNullPoint::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3057,7 +3057,7 @@ void P024::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P025::GetParallelParams(map<int,CPlotMarkMe*> *pList, int *length)
+float* PlotParallel::GetParallelParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3092,12 +3092,12 @@ float* P025::GetParallelParams(map<int,CPlotMarkMe*> *pList, int *length)
 }
 
 
-P025::P025()
+PlotParallel::PlotParallel()
 {
 	SetPlotType(L"PARALLEL");
 }
 
-ActionType P025::GetAction()
+ActionType PlotParallel::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -3164,12 +3164,12 @@ ActionType P025::GetAction()
 	return nO;
 }
 
-bool P025::OnCreate(const POINT& mp)
+bool PlotParallel::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create3Points(mp);
 }
 
-void P025::OnMoveStart()
+void PlotParallel::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -3197,7 +3197,7 @@ void P025::OnMoveStart()
 	}
 }
 
-void P025::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotParallel::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3248,7 +3248,7 @@ void P025::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P026::GetPercentParams(double value1, double value2, int *length)
+float* PlotPercent::GetPercentParams(double value1, double value2, int *length)
 {
 	float y1 = CPlotBaseMe::PY(value1);
 	float y2 = CPlotBaseMe::PY(value2);
@@ -3274,12 +3274,12 @@ float* P026::GetPercentParams(double value1, double value2, int *length)
 }
 
 
-P026::P026()
+PlotPercent::PlotPercent()
 {
 	SetPlotType(L"PERCENT");
 }
 
-ActionType P026::GetAction()
+ActionType PlotPercent::GetAction()
 {
 	ActionType nO = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -3316,12 +3316,12 @@ ActionType P026::GetAction()
 	return nO;
 }
 
-bool P026::OnCreate(const POINT& mp)
+bool PlotPercent::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P026::OnMoveStart()
+void PlotPercent::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -3347,7 +3347,7 @@ void P026::OnMoveStart()
 	}
 }
 
-void P026::OnMoving()
+void PlotPercent::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	switch (CPlotBaseMe::m_action)
@@ -3374,7 +3374,7 @@ void P026::OnMoving()
 	}
 }
 
-void P026::OnPaintGhost(CPaintMe *paint)
+void PlotPercent::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -3382,7 +3382,7 @@ void P026::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P026::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotPercent::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3414,14 +3414,14 @@ void P026::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P027::P027()
+PlotPeriodic::PlotPeriodic()
 {
 	m_beginPeriod = 1;
 	m_period = 5;
 	SetPlotType(L"PERIODIC");
 }
 
-ActionType P027::GetAction()
+ActionType PlotPeriodic::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -3450,7 +3450,7 @@ ActionType P027::GetAction()
 	return action;
 }
 
-vector<double> P027::GetPLParams(map<int,CPlotMarkMe*> *pList)
+vector<double> PlotPeriodic::GetPLParams(map<int,CPlotMarkMe*> *pList)
 {
 	vector<double> fValueList;
 	if ((int)pList->size() == 0)
@@ -3471,7 +3471,7 @@ vector<double> P027::GetPLParams(map<int,CPlotMarkMe*> *pList)
 	return fValueList;
 }
 
-bool P027::OnCreate(const POINT& mp)
+bool PlotPeriodic::OnCreate(const POINT& mp)
 {
 	if (CPlotBaseMe::m_dataSource->RowsCount() <= 0)
 	{
@@ -3491,7 +3491,7 @@ bool P027::OnCreate(const POINT& mp)
 	return true;
 }
 
-void P027::OnMoveStart()
+void PlotPeriodic::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -3512,7 +3512,7 @@ void P027::OnMoveStart()
 	}
 }
 
-void P027::OnMoving()
+void PlotPeriodic::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -3543,7 +3543,7 @@ void P027::OnMoving()
 	}
 }
 
-void P027::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotPeriodic::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3564,12 +3564,12 @@ void P027::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P028::P028()
+PlotPrice::PlotPrice()
 {
 	SetPlotType(L"PRICE");
 }
 
-ActionType P028::GetAction()
+ActionType PlotPrice::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -3589,12 +3589,12 @@ ActionType P028::GetAction()
 	return action;
 }
 
-bool P028::OnCreate(const POINT& mp)
+bool PlotPrice::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::CreatePoint(mp);
 }
 
-void P028::OnMoveStart()
+void PlotPrice::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -3606,7 +3606,7 @@ void P028::OnMoveStart()
 	}
 }
 
-void P028::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotPrice::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3636,12 +3636,12 @@ void P028::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P029::P029()
+PlotRangeruler::PlotRangeruler()
 {
 	SetPlotType(L"RANGERULER");
 }
 
-ActionType P029::GetAction()
+ActionType PlotRangeruler::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -3697,12 +3697,12 @@ ActionType P029::GetAction()
 	return action;
 }
 
-bool P029::OnCreate(const POINT& mp)
+bool PlotRangeruler::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P029::OnMoveStart()
+void PlotRangeruler::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -3726,7 +3726,7 @@ void P029::OnMoveStart()
 	}
 }
 
-void P029::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotRangeruler::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3783,12 +3783,12 @@ void P029::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P030::P030()
+PlotRaseline::PlotRaseline()
 {
 	SetPlotType(L"RASELINE");
 }
 
-float* P030::GetRaseLineParams(map<int,CPlotMarkMe*> *pList)
+float* PlotRaseline::GetRaseLineParams(map<int,CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3807,7 +3807,7 @@ float* P030::GetRaseLineParams(map<int,CPlotMarkMe*> *pList)
 	//return new float[] { a, b };
 }
 
-ActionType P030::GetAction()
+ActionType PlotRaseline::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -3823,12 +3823,12 @@ ActionType P030::GetAction()
 	return action;
 }
 
-bool P030::OnCreate(const POINT& mp)
+bool PlotRaseline::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::CreatePoint(mp);
 }
 
-void P030::OnMoveStart()
+void PlotRaseline::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -3842,7 +3842,7 @@ void P030::OnMoveStart()
 	}
 }
 
-void P030::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotRaseline::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3859,12 +3859,12 @@ void P030::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P031::P031()
+PlotRay::PlotRay()
 {
 	SetPlotType(L"RAY");
 }
 
-ActionType P031::GetAction()
+ActionType PlotRay::GetAction()
 {
 
 	ActionType action = ActionType_NO;
@@ -3911,12 +3911,12 @@ ActionType P031::GetAction()
 	return action;
 }
 
-bool P031::OnCreate(const POINT& mp)
+bool PlotRay::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsA(mp);
 }
 
-void P031::OnMoveStart()
+void PlotRay::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -3941,7 +3941,7 @@ void P031::OnMoveStart()
 	}
 }
 
-void P031::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotRay::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -3967,14 +3967,14 @@ void P031::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P032::P032()
+PlotRect::PlotRect()
 {
 	m_oppositePoint.x = 0;
 	m_oppositePoint.y = 0;
 	SetPlotType(L"RECT");
 }
 
-ActionType P032::GetAction()
+ActionType PlotRect::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() == 0)
@@ -3987,12 +3987,12 @@ ActionType P032::GetAction()
 	return CPlotBaseMe::SelectRect(mp, sIter0->second, sIter1->second);
 }
 
-bool P032::OnCreate(const POINT& mp)
+bool PlotRect::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P032::OnMoveStart()
+void PlotRect::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	if ((CPlotBaseMe::m_action != ActionType_MOVE) && (CPlotBaseMe::m_action != ActionType_NO))
@@ -4051,7 +4051,7 @@ void P032::OnMoveStart()
 	}
 }
 
-void P032::OnMoving()
+void PlotRect::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
 	switch (CPlotBaseMe::m_action)
@@ -4069,7 +4069,7 @@ void P032::OnMoving()
 	}
 }
 
-void P032::OnPaintGhost(CPaintMe *paint)
+void PlotRect::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -4077,7 +4077,7 @@ void P032::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P032::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotRect::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -4100,12 +4100,12 @@ void P032::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P033::P033()
+PlotSegement::PlotSegement()
 {
 	SetPlotType(L"SEGMENT");
 }
 
-ActionType P033::GetAction()
+ActionType PlotSegement::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -4151,12 +4151,12 @@ ActionType P033::GetAction()
 	return action;
 }
 
-bool P033::OnCreate(const POINT& mp)
+bool PlotSegement::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P033::OnMoveStart()
+void PlotSegement::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -4180,7 +4180,7 @@ void P033::OnMoveStart()
 	}
 }
 
-void P033::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotSegement::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -4203,12 +4203,12 @@ void P033::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P034::P034()
+PlotSine::PlotSine()
 {
 	SetPlotType(L"SINE");
 }
 
-ActionType P034::GetAction()
+ActionType PlotSine::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -4238,7 +4238,7 @@ ActionType P034::GetAction()
 	return action;
 }
 
-bool P034::OnCreate(const POINT& mp)
+bool PlotSine::OnCreate(const POINT& mp)
 {
 	if (CPlotBaseMe::m_dataSource->RowsCount() > 0)
 	{
@@ -4265,7 +4265,7 @@ bool P034::OnCreate(const POINT& mp)
 	return false;
 }
 
-void P034::OnMoveStart()
+void PlotSine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -4294,7 +4294,7 @@ void P034::OnMoveStart()
 	}
 }
 
-void P034::OnMoving()
+void PlotSine::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -4337,7 +4337,7 @@ void P034::OnMoving()
 	}
 }
 
-void P034::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotSine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -4379,12 +4379,12 @@ void P034::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P035::P035()
+PlotSpeedresist::PlotSpeedresist()
 {
 	SetPlotType(L"SPEEDRESIST");
 }
 
-ActionType P035::GetAction()
+ActionType PlotSpeedresist::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -4452,12 +4452,12 @@ ActionType P035::GetAction()
 	return action;
 }
 
-bool P035::OnCreate(const POINT& mp)
+bool PlotSpeedresist::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsA(mp);
 }
 
-void P035::OnMoveStart()
+void PlotSpeedresist::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -4482,7 +4482,7 @@ void P035::OnMoveStart()
 	}
 }
 
-void P035::OnPaintGhost(CPaintMe *paint)
+void PlotSpeedresist::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -4490,7 +4490,7 @@ void P035::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P035::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotSpeedresist::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 
 	if ((int)pList->size() != 0)
@@ -4543,7 +4543,7 @@ void P035::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double P036::GetSEChannelSD(map<int,CPlotMarkMe*> *pList)
+double PlotSechannel::GetSEChannelSD(map<int,CPlotMarkMe*> *pList)
 {
 	map<String,int>::iterator sIter = CPlotBaseMe::m_sourceFields.find(L"CLOSE");
 	if (sIter != CPlotBaseMe::m_sourceFields.end())
@@ -4571,12 +4571,12 @@ double P036::GetSEChannelSD(map<int,CPlotMarkMe*> *pList)
 }
 
 
-P036::P036()
+PlotSechannel::PlotSechannel()
 {
 	SetPlotType(L"SECHANNEL");
 }
 
-ActionType P036::GetAction()
+ActionType PlotSechannel::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -4639,12 +4639,12 @@ ActionType P036::GetAction()
 	return action;
 }
 
-bool P036::OnCreate(const POINT& mp)
+bool PlotSechannel::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P036::OnMoveStart()
+void PlotSechannel::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -4669,7 +4669,7 @@ void P036::OnMoveStart()
 	}
 }
 
-void P036::OnMoving()
+void PlotSechannel::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -4712,7 +4712,7 @@ void P036::OnMoving()
 	}
 }
 
-void P036::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotSechannel::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -4765,12 +4765,12 @@ void P036::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P037::P037()
+PlotSymmetricLine::PlotSymmetricLine()
 {
 	SetPlotType(L"SYMMETRICLINE");
 }
 
-ActionType P037::GetAction()
+ActionType PlotSymmetricLine::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() == 0)
@@ -4820,12 +4820,12 @@ ActionType P037::GetAction()
 	return ActionType_MOVE;
 }
 
-bool P037::OnCreate(const POINT& mp)
+bool PlotSymmetricLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsA(mp);
 }
 
-void P037::OnMoveStart()
+void PlotSymmetricLine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -4849,7 +4849,7 @@ void P037::OnMoveStart()
 	}
 }
 
-void P037::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotSymmetricLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -4892,7 +4892,7 @@ void P037::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P038::GetSymmetricTriangleParams(map<int,CPlotMarkMe*> *pList)
+float* PlotSymmetricTriangle::GetSymmetricTriangleParams(map<int,CPlotMarkMe*> *pList)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -4928,12 +4928,12 @@ float* P038::GetSymmetricTriangleParams(map<int,CPlotMarkMe*> *pList)
 }
 
 
-P038::P038()
+PlotSymmetricTriangle::PlotSymmetricTriangle()
 {
 	SetPlotType(L"SYMMETRICTRIANGLE");
 }
 
-ActionType P038::GetAction()
+ActionType PlotSymmetricTriangle::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -4999,12 +4999,12 @@ ActionType P038::GetAction()
 	return action;
 }
 
-bool P038::OnCreate(const POINT& mp)
+bool PlotSymmetricTriangle::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create3Points(mp);
 }
 
-void P038::OnMoveStart()
+void PlotSymmetricTriangle::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -5031,7 +5031,7 @@ void P038::OnMoveStart()
 	}
 }
 
-void P038::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotSymmetricTriangle::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -5083,7 +5083,7 @@ void P038::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double* P041::GetTimeRulerParams(map<int,CPlotMarkMe*> *pList, int *length)
+double* PlotTimeRuler::GetTimeRulerParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
 
 	if ((int)pList->size() == 0)
@@ -5109,12 +5109,12 @@ double* P041::GetTimeRulerParams(map<int,CPlotMarkMe*> *pList, int *length)
 }
 
 
-P041::P041()
+PlotTimeRuler::PlotTimeRuler()
 {
 	SetPlotType(L"TIMERULER");
 }
 
-ActionType P041::GetAction()
+ActionType PlotTimeRuler::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -5185,12 +5185,12 @@ ActionType P041::GetAction()
 	return action;
 }
 
-bool P041::OnCreate(const POINT& mp)
+bool PlotTimeRuler::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P041::OnMoveStart()
+void PlotTimeRuler::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -5214,7 +5214,7 @@ void P041::OnMoveStart()
 	}
 }
 
-void P041::OnMoving()
+void PlotTimeRuler::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -5248,7 +5248,7 @@ void P041::OnMoving()
 	}
 }
 
-void P041::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotTimeRuler::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -5311,12 +5311,12 @@ void P041::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P042::P042()
+PlotTriangle::PlotTriangle()
 {
 	SetPlotType(L"TRIANGLE");
 }
 
-ActionType P042::GetAction()
+ActionType PlotTriangle::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -5358,7 +5358,7 @@ ActionType P042::GetAction()
 	return action;
 }
 
-bool P042::OnCreate(const POINT& mp)
+bool PlotTriangle::OnCreate(const POINT& mp)
 {
 	if (CPlotBaseMe::m_dataSource->RowsCount() <= 0)
 	{
@@ -5380,7 +5380,7 @@ bool P042::OnCreate(const POINT& mp)
 	return true;
 }
 
-void P042::OnMoveStart()
+void PlotTriangle::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -5408,7 +5408,7 @@ void P042::OnMoveStart()
 	}
 }
 
-void P042::OnPaintGhost(CPaintMe *paint)
+void PlotTriangle::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -5416,7 +5416,7 @@ void P042::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P042::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotTriangle::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -5446,7 +5446,7 @@ void P042::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-RECT P043::GetUpArrowRect(float x, float y, float width)
+RECT PlotUpArrow::GetUpArrowRect(float x, float y, float width)
 {
 	if(width>10)
 	{
@@ -5458,12 +5458,12 @@ RECT P043::GetUpArrowRect(float x, float y, float width)
 	return markRect;
 }
 
-P043::P043()
+PlotUpArrow::PlotUpArrow()
 {
 	SetPlotType(L"UPARROW");
 }
 
-ActionType P043::GetAction()
+ActionType PlotUpArrow::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -5484,12 +5484,12 @@ ActionType P043::GetAction()
 	return action;
 }
 
-bool P043::OnCreate(const POINT& mp)
+bool PlotUpArrow::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::CreatePoint(mp);
 }
 
-void P043::OnMoveStart()
+void PlotUpArrow::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -5504,7 +5504,7 @@ void P043::OnMoveStart()
 	}
 }
 
-void P043::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotUpArrow::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -5540,12 +5540,12 @@ void P043::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P044::P044()
+PlotVLine::PlotVLine()
 {
 	SetPlotType(L"VLINE");
 }
 
-ActionType P044::GetAction()
+ActionType PlotVLine::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -5562,12 +5562,12 @@ ActionType P044::GetAction()
 	return action;
 }
 
-bool P044::OnCreate(const POINT& mp)
+bool PlotVLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::CreatePoint(mp);
 }
 
-void P044::OnMoveStart()
+void PlotVLine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -5582,7 +5582,7 @@ void P044::OnMoveStart()
 	}
 }
 
-void P044::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotVLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -5595,7 +5595,7 @@ void P044::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float* P045::GetWaveRulerParams(double value1, double value2, int *length)
+float* PlotWavRuler::GetWaveRulerParams(double value1, double value2, int *length)
 {
 	float y1 = CPlotBaseMe::PY(value1);
 	float y2 = CPlotBaseMe::PY(value2);
@@ -5639,12 +5639,12 @@ float* P045::GetWaveRulerParams(double value1, double value2, int *length)
 }
 
 
-P045::P045()
+PlotWavRuler::PlotWavRuler()
 {
 	SetPlotType(L"WAVERULER");
 }
 
-ActionType P045::GetAction()
+ActionType PlotWavRuler::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -5695,12 +5695,12 @@ ActionType P045::GetAction()
 	return action;
 }
 
-bool P045::OnCreate(const POINT& mp)
+bool PlotWavRuler::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsB(mp);
 }
 
-void P045::OnMoveStart()
+void PlotWavRuler::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -5725,7 +5725,7 @@ void P045::OnMoveStart()
 	}
 }
 
-void P045::OnPaintGhost(CPaintMe *paint)
+void PlotWavRuler::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -5733,7 +5733,7 @@ void P045::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P045::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotWavRuler::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -5766,7 +5766,7 @@ void P045::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double* P046::GetTironelLevelsParams(map<int,CPlotMarkMe*> *pList, int *length)
+double* PlotTironelevels::GetTironelLevelsParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
 	*length = 0;
 	double *candleRange = CPlotBaseMe::GetCandleRange(pList, length);
@@ -5787,12 +5787,12 @@ double* P046::GetTironelLevelsParams(map<int,CPlotMarkMe*> *pList, int *length)
 }
 
 
-P046::P046()
+PlotTironelevels::PlotTironelevels()
 {
 	SetPlotType(L"TIRONELEVELS");
 }
 
-ActionType P046::GetAction()
+ActionType PlotTironelevels::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -5850,12 +5850,12 @@ ActionType P046::GetAction()
 	return action;
 }
 
-bool P046::OnCreate(const POINT& mp)
+bool PlotTironelevels::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P046::OnMoveStart()
+void PlotTironelevels::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -5880,7 +5880,7 @@ void P046::OnMoveStart()
 	}
 }
 
-void P046::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotTironelevels::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -5928,7 +5928,7 @@ void P046::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double P047::GetRRCRange(map<int,CPlotMarkMe*> *pList, float *param)
+double PlotRaffchannel::GetRRCRange(map<int,CPlotMarkMe*> *pList, float *param)
 {
 	map<String,int>::iterator sIterHigh = CPlotBaseMe::m_sourceFields.find(L"HIGH");
 	map<String,int>::iterator sIterLow = CPlotBaseMe::m_sourceFields.find(L"LOW");
@@ -5982,12 +5982,12 @@ double P047::GetRRCRange(map<int,CPlotMarkMe*> *pList, float *param)
 }
 
 
-P047::P047()
+PlotRaffchannel::PlotRaffchannel()
 {
 	SetPlotType(L"RAFFCHANNEL");
 }
 
-ActionType P047::GetAction()
+ActionType PlotRaffchannel::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -6050,12 +6050,12 @@ ActionType P047::GetAction()
 	return action;
 }
 
-bool P047::OnCreate(const POINT& mp)
+bool PlotRaffchannel::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P047::OnMoveStart()
+void PlotRaffchannel::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -6078,7 +6078,7 @@ void P047::OnMoveStart()
 	}
 }
 
-void P047::OnMoving()
+void PlotRaffchannel::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -6121,7 +6121,7 @@ void P047::OnMoving()
 	}
 }
 
-void P047::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotRaffchannel::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6192,12 +6192,12 @@ void P047::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P048::P048()
+PlotQuadrantLines::PlotQuadrantLines()
 {
 	SetPlotType(L"QUADRANTLINES");
 }
 
-ActionType P048::GetAction()
+ActionType PlotQuadrantLines::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -6246,7 +6246,7 @@ ActionType P048::GetAction()
 		{
 			return action;
 		}
-		float *percentParams = P026::GetPercentParams(candleRange[0], candleRange[1], &length);
+		float *percentParams = PlotPercent::GetPercentParams(candleRange[0], candleRange[1], &length);
 		for (int i = 0; i < length; i++)
 		{
 			if (CPlotBaseMe::SelectRay(mp, x1, percentParams[i], x2, percentParams[i]))
@@ -6258,12 +6258,12 @@ ActionType P048::GetAction()
 	return action;
 }
 
-bool P048::OnCreate(const POINT& mp)
+bool PlotQuadrantLines::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P048::OnMoveStart()
+void PlotQuadrantLines::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -6287,7 +6287,7 @@ void P048::OnMoveStart()
 	}
 }
 
-void P048::OnMoving()
+void PlotQuadrantLines::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -6330,7 +6330,7 @@ void P048::OnMoving()
 	}
 }
 
-void P048::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotQuadrantLines::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6355,7 +6355,7 @@ void P048::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 			if (candleRange != NULL)
 			{
 				length = 0;
-				float *percentParams = P026::GetPercentParams(candleRange[0], candleRange[1], &length);
+				float *percentParams = PlotPercent::GetPercentParams(candleRange[0], candleRange[1], &length);
 				for (int i = 0; i < length; i++)
 				{
 					float yp = percentParams[i];
@@ -6379,7 +6379,7 @@ void P048::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ActionType P049::GetAction(const POINT& mp)
+ActionType PlotBoxLine::GetAction(const POINT& mp)
 {
 	int length = 0;
 	double *candleRange = CPlotBaseMe::GetCandleRange(&m_marks, &length);
@@ -6395,12 +6395,12 @@ ActionType P049::GetAction(const POINT& mp)
 }
 
 
-P049::P049()
+PlotBoxLine::PlotBoxLine()
 {
 	SetPlotType(L"BOXLINE");
 }
 
-ActionType P049::GetAction()
+ActionType PlotBoxLine::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -6415,12 +6415,12 @@ ActionType P049::GetAction()
 	return action;
 }
 
-bool P049::OnCreate(const POINT& mp)
+bool PlotBoxLine::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2CandlePoints(mp);
 }
 
-void P049::OnMoveStart()
+void PlotBoxLine::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -6445,7 +6445,7 @@ void P049::OnMoveStart()
 	}
 }
 
-void P049::OnMoving()
+void PlotBoxLine::OnMoving()
 {
 	POINT mp = CPlotBaseMe::GetMovingPoint();
 	CChartMe *chart = CPlotBaseMe::GetChart();
@@ -6488,7 +6488,7 @@ void P049::OnMoving()
 	}
 }
 
-void P049::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotBoxLine::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6556,12 +6556,12 @@ void P049::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P050::P050()
+PlotParallelogram::PlotParallelogram()
 {
 	SetPlotType(L"PARALLELOGRAM");
 }
 
-ActionType P050::GetAction()
+ActionType PlotParallelogram::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -6614,7 +6614,7 @@ ActionType P050::GetAction()
 	return action;
 }
 
-POINT* P050::GetPLPoints(map<int,CPlotMarkMe*> *pList, int *length)
+POINT* PlotParallelogram::GetPLPoints(map<int,CPlotMarkMe*> *pList, int *length)
 {
 	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 	map<int,CPlotMarkMe*>::iterator sIter1 = CPlotBaseMe::m_marks.find(1);
@@ -6648,7 +6648,7 @@ POINT* P050::GetPLPoints(map<int,CPlotMarkMe*> *pList, int *length)
 	//return new POINT[] { point, point2, point3, point4 };
 }
 
-bool P050::OnCreate(const POINT& mp)
+bool PlotParallelogram::OnCreate(const POINT& mp)
 {
 	if (CPlotBaseMe::m_dataSource->RowsCount() <= 0)
 	{
@@ -6671,7 +6671,7 @@ bool P050::OnCreate(const POINT& mp)
 	return true;
 }
 
-void P050::OnMoveStart()
+void PlotParallelogram::OnMoveStart()
 {
 	CPlotBaseMe::m_moveTimes++;
 	CPlotBaseMe::m_action = GetAction();
@@ -6696,7 +6696,7 @@ void P050::OnMoveStart()
 	}
 }
 
-void P050::OnPaintGhost(CPaintMe *paint)
+void PlotParallelogram::OnPaintGhost(CPaintMe *paint)
 {
 	if (CPlotBaseMe::m_moveTimes > 1)
 	{
@@ -6704,7 +6704,7 @@ void P050::OnPaintGhost(CPaintMe *paint)
 	}
 }
 
-void P050::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotParallelogram::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6733,12 +6733,12 @@ void P050::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P051::P051()
+PlotCircle::PlotCircle()
 {
 	SetPlotType(L"CIRCLE");
 }
 
-ActionType P051::GetAction()
+ActionType PlotCircle::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -6771,12 +6771,12 @@ ActionType P051::GetAction()
 	return action;
 }
 
-bool P051::OnCreate(const POINT& mp)
+bool PlotCircle::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::Create2PointsA(mp);
 }
 
-void P051::OnMoveStart()
+void PlotCircle::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	CPlotBaseMe::ClearMarks(&m_startMarks);
@@ -6801,7 +6801,7 @@ void P051::OnMoveStart()
 	}
 }
 
-void P051::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotCircle::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6825,7 +6825,7 @@ void P051::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void P052::GetLine3Params(map<int,CPlotMarkMe*> *pList, float *k, float *d, float *x4)
+void PlotPriceChannel::GetLine3Params(map<int,CPlotMarkMe*> *pList, float *k, float *d, float *x4)
 {
 	map<int,CPlotMarkMe*>::iterator sIter0 = CPlotBaseMe::m_marks.find(0);
 	map<int,CPlotMarkMe*>::iterator sIter2 = CPlotBaseMe::m_marks.find(2);
@@ -6834,7 +6834,7 @@ void P052::GetLine3Params(map<int,CPlotMarkMe*> *pList, float *k, float *d, floa
 	float x1 = CPlotBaseMe::PX(bIndex);
 	float x3 = CPlotBaseMe::PX(pIndex);
 	int length = 0;
-	float *parallelParams = P025::GetParallelParams(&m_marks, &length);
+	float *parallelParams = PlotParallel::GetParallelParams(&m_marks, &length);
 	if (parallelParams != NULL && length > 2)
 	{
 		*k = parallelParams[0];
@@ -6856,7 +6856,7 @@ void P052::GetLine3Params(map<int,CPlotMarkMe*> *pList, float *k, float *d, floa
 	}
 }
 
-void P052::PaintEx(CPaintMe *paint, map<int,CPlotMarkMe*> *pList,_int64 lineColor)
+void PlotPriceChannel::PaintEx(CPaintMe *paint, map<int,CPlotMarkMe*> *pList,_int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -6880,12 +6880,12 @@ void P052::PaintEx(CPaintMe *paint, map<int,CPlotMarkMe*> *pList,_int64 lineColo
 }
 
 
-P052::P052()
+PlotPriceChannel::PlotPriceChannel()
 {
 	SetPlotType(L"PRICECHANNEL");
 }
 
-ActionType P052::GetAction()
+ActionType PlotPriceChannel::GetAction()
 {
 	ActionType action = CPlotBaseMe::GetAction();
 	if (action == ActionType_NO)
@@ -6911,7 +6911,7 @@ ActionType P052::GetAction()
 	return action;
 }
 
-void P052::OnMoveStart()
+void PlotPriceChannel::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -6932,13 +6932,13 @@ void P052::OnMoveStart()
 	}
 }
 
-void P052::OnPaint(CPaintMe *paint)
+void PlotPriceChannel::OnPaint(CPaintMe *paint)
 {
 	PaintEx(paint, &m_marks, GetColor());
 	CPlotBaseMe::OnPaint(paint);
 }
 
-void P052::OnPaintGhost(CPaintMe *paint)
+void PlotPriceChannel::OnPaintGhost(CPaintMe *paint)
 {
 	PaintEx(paint, &m_startMarks, GetSelectedColor());
 	CPlotBaseMe::OnPaintGhost(paint);
@@ -6946,12 +6946,12 @@ void P052::OnPaintGhost(CPaintMe *paint)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-P053::P053()
+PlotGP::PlotGP()
 {
 	SetPlotType(L"GP");
 }
 
-ActionType P053::GetAction()
+ActionType PlotGP::GetAction()
 {
 	ActionType action = ActionType_NO;
 	if ((int)CPlotBaseMe::m_marks.size() != 0)
@@ -6977,12 +6977,12 @@ ActionType P053::GetAction()
 	return action;
 }
 
-bool P053::OnCreate(const POINT& mp)
+bool PlotGP::OnCreate(const POINT& mp)
 {
 	return CPlotBaseMe::CreatePoint(mp);
 }
 
-void P053::OnMoveStart()
+void PlotGP::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -7003,7 +7003,7 @@ void P053::OnMoveStart()
 	}
 }
 
-void P053::OnMoving()
+void PlotGP::OnMoving()
 {
 	POINT movingPoint = CPlotBaseMe::GetMovingPoint();
 	if (CPlotBaseMe::m_action == ActionType_MOVE)
@@ -7012,7 +7012,7 @@ void P053::OnMoving()
 	}
 }
 
-void P053::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotGP::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	if ((int)pList->size() != 0)
 	{
@@ -7041,7 +7041,7 @@ void P053::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-float* P054::GetGoldenRatioAimParams(map<int,CPlotMarkMe*> *pList, int *length)
+float* PlotGA::GetGoldenRatioAimParams(map<int,CPlotMarkMe*> *pList, int *length)
 {
 	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
@@ -7055,12 +7055,12 @@ float* P054::GetGoldenRatioAimParams(map<int,CPlotMarkMe*> *pList, int *length)
 }
 
 
-P054::P054()
+PlotGA::PlotGA()
 {
 	SetPlotType(L"GA");
 }
 
-ActionType P054::GetAction()
+ActionType PlotGA::GetAction()
 {
 	ActionType action = CPlotBaseMe::GetAction();
 	int length = 0;
@@ -7072,7 +7072,7 @@ ActionType P054::GetAction()
 	return action;
 }
 
-void P054::OnMoveStart()
+void PlotGA::OnMoveStart()
 {
 	CPlotBaseMe::m_action = GetAction();
 	//CPlotBaseMe::m_startMarks.Clear();
@@ -7090,7 +7090,7 @@ void P054::OnMoveStart()
 	//CPlotBaseMe::m_startMarks[2] = CPlotBaseMe::m_marks[2];
 }
 
-void P054::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
+void PlotGA::Paint(CPaintMe *paint, map<int,CPlotMarkMe*> *pList, _int64 lineColor)
 {
 	map<int,CPlotMarkMe*>::iterator sIter0 = pList->find(0);
 	map<int,CPlotMarkMe*>::iterator sIter1 = pList->find(1);
@@ -7129,195 +7129,195 @@ CPlotMe* PFactory::CreatePlot(const String& plotType)
 {
 	if(plotType == L"ANDREWSPITCHFORK")
 	{
-		return new P001();
+		return new PlotAndrewsPitchFork();
 	}
 	else if(plotType == L"ANGLELINE")
 	{
-		return new P002();
+		return new PlotAngleLine();
 	}
 	else if(plotType == L"CIRCUMCIRCLE")
 	{
-		return new P003();
+		return new PlotCircumCircle();
 	}
 	else if(plotType == L"ARROWSEGMENT")
 	{
-		return new P004();
+		return new PlotArrowSegment();
 	}
 	else if(plotType == L"DOWNARROW")
 	{
-		return new P005();
+		return new PlotDownArrow();
 	}
 	else if(plotType == L"DROPLINE")
 	{
-		return new P006();
+		return new PlotDropLine();
 	}
 	else if(plotType == L"ELLIPSE")
 	{
-		return new P009();
+		return new PlotEllipse();
 	}
 	else if(plotType == L"FIBOELLIPSE")
 	{
-		return new P010();
+		return new PlotFiboEllipse();
 	}
 	else if(plotType == L"FIBOFANLINE")
 	{
-		return new P011();
+		return new PlotFibofanLine();
 	}
 	else if(plotType == L"FIBOTIMEZONE")
 	{
-		return new P012();
+		return new PlotFiboTimeZone();
 	}
 	else if(plotType == L"GANNBOX")
 	{
-		return new P014();
+		return new PlotGannbox();
 	}
 	else if(plotType == L"GANNLINE")
 	{
-		return new P016();
+		return new PlotGannLine();
 	}
 	else if(plotType == L"GOLDENRATIO")
 	{
-		return new P017();
+		return new PlotGoldenRatio();
 	}
 	else if(plotType == L"HLINE")
 	{
-		return new P018();
+		return new PlotHline();
 	}
 	else if(plotType == L"LEVELGRADING")
 	{
-		return new P019();
+		return new PlotLevelGrading();
 	}
 	else if(plotType == L"LINE")
 	{
-		return new P020();
+		return new PlotLine();
 	}
 	else if(plotType == L"LRBAND")
 	{
-		return new P021();
+		return new PlotLrBand();
 	}
 	else if(plotType == L"LRCHANNEL")
 	{
-		return new P022();
+		return new PlotLrChannel();
 	}
 	else if(plotType == L"LRLINE")
 	{
-		return new P023();
+		return new PlotLrLine();
 	}
 	else if(plotType == L"NULLPOINT")
 	{
-		return new P024();
+		return new PlotNullPoint();
 	}
 	else if(plotType == L"PARALLEL")
 	{
-		return new P025();
+		return new PlotParallel();
 	}
 	else if(plotType == L"PERCENT")
 	{
-		return new P026();
+		return new PlotPercent();
 	}
 	else if(plotType == L"PERIODIC")
 	{
-		return new P027();
+		return new PlotPeriodic();
 	}
 	else if(plotType == L"PRICE")
 	{
-		return new P028();
+		return new PlotPrice();
 	}
 	else if(plotType == L"RANGERULER")
 	{
-		return new P029();
+		return new PlotRangeruler();
 	}
 	else if(plotType == L"RASELINE")
 	{
-		return new P030();
+		return new PlotRaseline();
 	}
 	else if(plotType == L"RAY")
 	{
-		return new P031();
+		return new PlotRay();
 	}
 	else if(plotType == L"RECT")
 	{
-		return new P032();
+		return new PlotRect();
 	}
 	else if(plotType == L"SEGMENT")
 	{
-		return new P033();
+		return new PlotSegement();
 	}
 	else if(plotType == L"SINE")
 	{
-		return new P034();
+		return new PlotSine();
 	}
 	else if(plotType == L"SPEEDRESIST")
 	{
-		return new P035();
+		return new PlotSpeedresist();
 	}
 	else if(plotType == L"SECHANNEL")
 	{
-		return new P036();
+		return new PlotSechannel();
 	}
 	else if(plotType == L"SYMMETRICLINE")
 	{
-		return new P037();
+		return new PlotSymmetricLine();
 	}
 	else if(plotType == L"SYMMETRICTRIANGLE")
 	{
-		return new P038();
+		return new PlotSymmetricTriangle();
 	}
 	else if(plotType == L"TIMERULER")
 	{
-		return new P041();
+		return new PlotTimeRuler();
 	}
 	else if(plotType == L"TRIANGLE")
 	{
-		return new P042();
+		return new PlotTriangle();
 	}
 	else if(plotType == L"UPARROW")
 	{
-		return new P043();
+		return new PlotUpArrow();
 	}
 	else if(plotType == L"VLINE")
 	{
-		return new P044();
+		return new PlotVLine();
 	}
 	else if(plotType == L"WAVERULER")
 	{
-		return new P045();
+		return new PlotWavRuler();
 	}
 	else if(plotType == L"TIRONELEVELS")
 	{
-		return new P046();
+		return new PlotTironelevels();
 	}
 	else if(plotType == L"RAFFCHANNEL")
 	{
-		return new P047();
+		return new PlotRaffchannel();
 	}
 	else if(plotType == L"QUADRANTLINES")
 	{
-		return new P048();
+		return new PlotQuadrantLines();
 	}
 	else if(plotType == L"BOXLINE")
 	{
-		return new P049();
+		return new PlotBoxLine();
 	}
 	else if(plotType == L"PARALLELOGRAM")
 	{
-		return new P050();
+		return new PlotParallelogram();
 	}
 	else if(plotType == L"CIRCLE")
 	{
-		return new P051();
+		return new PlotCircle();
 	}
 	else if(plotType == L"PRICECHANNEL")
 	{
-		return new P052();
+		return new PlotPriceChannel();
 	}
 	else if(plotType == L"GP")
 	{
-		return new P053();
+		return new PlotGP();
 	}
 	else if(plotType == L"GA")
 	{
-		return new P054();
+		return new PlotGA();
 	}
 	return NULL;
 }
